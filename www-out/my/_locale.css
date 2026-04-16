@@ -1,0 +1,7 @@
+/* translator-agent: styles for my */
+:root { --ta-locale: "my"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Myanmar", "Padauk", sans-serif;
+  line-height: 2.2;
+}

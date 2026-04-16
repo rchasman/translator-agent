@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — 世界中のサイトを一つのコマンドで</title>
+  <meta name="description" content="AIによるトランスクリエーションであなたのサイトが71言語のローカライズ版に。コマンド一発。90秒で完了。代理店不要。">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">ウェブはみんなのために作られた。今ではみんなに語りかける。</h1>
+      <p id="t-sub">AIトランスクリエーションがあなたのサイトを71言語のローカライズ版に変身。単なる翻訳ではなく、文化に合わせて書き直します。ことわざはすべて現地化、ジョークは現地の笑いに、文字の書体系も完璧に対応。</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">世界中で50億人がネットを利用中。ウェブの60％は英語コンテンツです。問題は技術じゃなくてコストでした。プロのローカライズは約1ヶ月で10万円以上かかるため、多くの企業は一言語だけで勝負しがちです。</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AIがこの溝を埋めました</h2>
+      <p id="t-shift-body">機械翻訳じゃありません。トランスクリエーションです。たとえば「弊社のハムスターが鋭意作業中です」は日本では通じないので、文化に合った面白い表現に書き換えます。月額49ドルは月6,980円に。ドイツ語のテキストは30％長くなることもわかっています。アラビア語ならレイアウトも左右反転。タイ語は単語間に空白がありません。</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">ビルド先を指示するだけで、全言語対応。</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTMLファイルにはlang属性とdir属性を自動挿入。各言語に最適なフォントスタック、行間、文字方向のCSSが適用されます。VercelのミドルウェアがAccept-Language検出も自動処理。1回デプロイするだけで世界中に対応。</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">このページが証明です</h2>
+      <p id="t-proof-body">今ご覧の文章は、このツールで処理されたものです。スペースキーで言語を切り替え可能。日本語版はネイティブが使うビジネス慣用句を採用。アラビア語版ではレイアウトが鏡映しになります。ドイツ語版は文字数が多め。どの言語版も、その文化の人が書いたように読めます。</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">代理店不要。スプレッドシート不要。登録不要。あなたのキーで、あなたのビルドを、あなたの言語へ。</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MITライセンス。あなたのキーで、あなたのビルドを、あなたの言語へ。</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> 言語切り替え
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

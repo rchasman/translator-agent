@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — 全球网站，一条命令搞定</title>
+  <meta name="description" content="AI转化创意，让您的网站拥有71个本地化版本。一条命令，90秒，无需中介。">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">互联网是为每个人而建。现在，互联网也能与每个人对话。</h1>
+      <p id="t-sub">AI转化创意，让您的网站拥有71个本地化版本。不是简单翻译——是为每种文化重新创作。每个习语调整到位，每个笑话恰到好处，每种文字系统都能兼容。</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">50亿网民，60%的网页内容是英语。差距从来不是技术问题，而是经济问题。专业本地化费用高达¥70,000，且至少耗时一个月。因此大多数公司只能选择用一种语言上线，抱着侥幸心理等待奇迹发生。</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI弥合了差距</h2>
+      <p id="t-shift-body">这不是机器翻译，而是“转化创意”。模型知道“我们的仓鼠正在努力加班”这种表达在日本听不懂——于是改写成更符合当地文化的幽默。它知道$49/月要变成“月费6,980日元”。它知道德语文字比英语多30%。它知道阿拉伯语页面要整体镜像排版，泰语没有空格分词。</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">指向你的构建，获取所有语言版本。</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML文件自动注入lang和dir属性。每种语言版本匹配相应字体、行距和文本方向。Vercel中间件自动识别Accept-Language头。部署一次，服务全球。</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">这页就是证明</h2>
+      <p id="t-proof-body">您正在阅读的每个字都经过本工具处理。按空格键可切换语言。日文版使用地道的商务表达。切换到阿拉伯语，布局会自动镜像。德语版内容更多，因为德语本来就比其他语言长。每个版本都像由当地人亲自撰写。</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">无需中介，无需表格，无需注册。您的密钥，您的构建，您的语言。</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT 许可。您的密钥，您的构建，您的语言。</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> 切换语言
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

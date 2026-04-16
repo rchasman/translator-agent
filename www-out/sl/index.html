@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sl" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Globalne spletne strani, z enim ukazom</title>
+  <meta name="description" content="AI preoblikovanje vaše strani v 71 lokaliziranih različic. En ukaz. 90 sekund. Brez agencije.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Splet je bil ustvarjen za vse. Zdaj sporazumeva z vsakim.</h1>
+      <p id="t-sub">AI preoblikovanje spremeni vašo stran v 71 lokalnih verzij. Ne prevod — ponovno napisano za vsako kulturo. Vsak izraz prilagojen, vsak vic zadane, vsak pisni sistem upoštevan.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 milijard ljudi je na spletu. 60 % vsebine na spletu je v angleščini. Ovira ni bila nikoli tehnična — bila je finančna. Profesionalna lokalizacija stane 10.000 € in traja mesec dni. Zato večina podjetij objavi le v enem jeziku in upa na najboljše.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI je zapolnil vrzel</h2>
+      <p id="t-shift-body">Ne strojni prevod, temveč preoblikovanje. Model ve, da »naši hrčki delajo na tem« ne zadene pri nas — in ga preoblikuje v lokalno primeren šaljivi izraz. Ve, da 49 €/mesec postane 6.980 JPY na mesec. Ve, da nemščina potrebuje za 30 % več prostora. Ve, da arabščina zrcali celotno postavitev in da tajščina nima presledkov med besedami.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Usmeri na svoj izdelek. Pridobi vse jezike.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML datoteke dobijo atributa lang in dir. Vsaka lokalizacija prejme CSS z ustrezno pisavo, višino vrstice in smerjo besedila. Vercel middleware samodejno zazna Accept-Language. Enkrat razporedi, postrezi svetu.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Ta stran je dokaz</h2>
+      <p id="t-proof-body">Vsaka beseda, ki jo berete, je bila ustvarjena z orodjem, ki ga opisuje. Pritisnite presledek za preklapljanje med jeziki. Japonska različica uporablja poslovne izraze, ki jih izbere domačin. Pojdite na arabščino in opazujte zrcaljenje postavitve. Nemška različica je daljša, kot se za nemščino spodobi. Vsaka različica se bere, kot da jo je napisal nekdo iz te kulture.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Brez agencije. Brez preglednic. Brez prijave. Vaši ključi, vaš izdelek, vaši jeziki.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT licenca. Vaši ključi, vaš izdelek, vaši jeziki.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>presledek</kbd> menjaj jezike
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

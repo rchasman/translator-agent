@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ro" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Site-uri globale, cu o singură comandă</title>
+  <meta name="description" content="Transcrearea AI transformă site-ul tău în 71 de versiuni localizate. O singură comandă. 90 de secunde. Fără agenții.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Internetul este pentru toată lumea. Acum vorbește pe limba lor.</h1>
+      <p id="t-sub">Transcrearea AI transformă site-ul tău în 71 de versiuni adaptate local. Nu doar tradus — rescris pentru fiecare cultură. Fiecare expresie adaptată, fiecare glumă livrată perfect, fiecare sistem de scriere tratat corect.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 miliarde de oameni sunt conectați la internet. 60% din conținutul web este în engleză. Nu tehnologia era problema — era vorba de costuri. Localizarea profesională costă în jur de 50.000 lei și durează o lună. Așa că majoritatea companiilor se mulțumesc cu o singură limbă și speră la ce e mai bun.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI a eliminat această diferență</h2>
+      <p id="t-shift-body">Nu e vorba de traducere automată. Ci de transcreare. Modelul știe că „șoarecii noștri de bibliotecă lucrează la asta” nu prinde la japonezi — și o transformă într-o glumă potrivită cultural. Știe că 49$/lună devine 月額6,980円. Știe că germana are nevoie de 30% mai mult spațiu. Știe că araba inversează tot designul iar tailandeza nu are spații între cuvinte.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Indică-ți proiectul. Primești toate limbile.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">Fișierele HTML primesc atributele lang și dir injectate. Fiecare limbă are CSS cu fonturi, înălțimi de linie și direcție corecte. Un middleware Vercel detectează automat Accept-Language. Publică o dată, servește întreg mapamondul.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Această pagină e dovada</h2>
+      <p id="t-proof-body">Fiecare cuvânt pe care îl citești a fost procesat de unealta despre care vorbește. Apasă spațiu să schimbi limbile. Varianta japoneză folosește expresii de afaceri alese de un vorbitor nativ. Sari la araba și vezi cum se inversează aspectul paginii. Varianta germană e mai lungă, pentru că germana mereu necesită mai mult spațiu. Fiecare versiune sună ca și cum ar fi scris-o cineva din cultura respectivă.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Fără agenții. Fără tabele Excel. Fără înregistrări. Cheile tale, build-ul tău, limbile tale.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">Licență MIT. Cheile tale, build-ul tău, limbile tale.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>spațiu</kbd> schimbă limba
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

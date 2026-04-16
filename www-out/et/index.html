@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="et" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Ülemaailmsed veebid, üks käsk</title>
+  <meta name="description" content="Tehisintellekti transkreatsioon muudab su saidi 71 lokaliseeritud versiooniks. Üks käsk. 90 sekundit. Ilma agentuurita.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Veeb loodi kõigile. Nüüd räägib see kõigile.</h1>
+      <p id="t-sub">Tehisintellekti transkreatsioon muudab su saidi 71 kohandatud versiooniks. Mitte lihtsalt tõlge — iga kultuuri jaoks kirjutatud ümber. Iga väljend sobitatakse, iga nali tabab, iga kirjasüsteem saab paika.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 miljardit inimest kasutab internetti. 60% veebi on inglise keeles. Kõige suurem takistus polnud tehniline, vaid rahaline. Professionaalne lokaliseerimine maksab 10 000 eurot ja võtab kuu aega. Enamik ettevõtteid saadabki sama keeles välja ja loodab parimat.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">Tehisintellekt sulges lõhe</h2>
+      <p id="t-shift-body">See pole masintõlge, vaid transkreatsioon. Mudel mõistab, et „meie hamsterid töötavad selle kallal“ ei sobi Jaapanis — ning kirjutab selle kultuuriliselt sobivaks naljaks. Ta teab, et 49 USD kuus tähendab 49 €/kuus. Ta oskab eesti keeles ruumi vajaduse eripära, arabia keel peegeldab kogu kujundust ja tai keel kirjutab sõnad kokku ilma tühikuteta.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Näita oma kompileerimist. Saa kõik keeled.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML-failidele lisatakse automaatselt lang ja dir atribuudid. Iga keel saab CSS-i koos õige kirjatüübi, rea kõrguse ja tekstisuunaga. Verceli vahend tuvastab Accept-Language päise automaatselt. Avalda korra, serveeri kogu maailmale.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">See leht on tõestus</h2>
+      <p id="t-proof-body">Iga sõna, mida sa loed, on loodud selle tööriistaga, mida ta kirjeldab. Vajuta tühikut, et vahetada keelt. Jaapani versioon kasutab ärikeele väljendeid, mida kohalik rääkija kasutaks. Nool vasakule-arabia keel ja vaata, kuidas paigutus peegeldub. Saksa keeles on tekst pikem, sest saksa keel ongi ulatuslikum. Iga versioon kõlab nagu keele kodanik seda kirjutas.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Ilma agentuurita. Ilma tabelarvutusteta. Ilma registreerimiseta. Sinu võtmed, sinu kompileerimine, sinu keeled.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT litsentsiga. Sinu võtmed, sinu kompileerimine, sinu keeled.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>tühik</kbd> vaheta keeli
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

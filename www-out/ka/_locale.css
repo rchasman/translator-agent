@@ -1,0 +1,7 @@
+/* translator-agent: styles for ka */
+:root { --ta-locale: "ka"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Georgian", sans-serif;
+  line-height: 1.6;
+}

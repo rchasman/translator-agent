@@ -1,0 +1,7 @@
+/* translator-agent: styles for si */
+:root { --ta-locale: "si"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Sinhala", sans-serif;
+  line-height: 1.8;
+}

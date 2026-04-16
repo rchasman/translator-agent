@@ -1,0 +1,7 @@
+/* translator-agent: styles for am */
+:root { --ta-locale: "am"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Ethiopic", sans-serif;
+  line-height: 1.8;
+}

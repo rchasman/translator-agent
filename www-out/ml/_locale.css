@@ -1,0 +1,7 @@
+/* translator-agent: styles for ml */
+:root { --ta-locale: "ml"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Malayalam", sans-serif;
+  line-height: 1.8;
+}

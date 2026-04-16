@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Глобальні сайти, однією командою</title>
+  <meta name="description" content="AI-транскреація перетворює ваш сайт у 71 локалізовану версію. Однією командою. За 90 секунд. Без агентств.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Інтернет створений для всіх. Тепер він говорить кожною мовою.</h1>
+      <p id="t-sub">AI-транскреація перетворює ваш сайт у 71 локалізовану версію. Не просто переклад — адаптовано під кожну культуру. Всі приказки пристосовані, всі жарти влучні, усі системи письма враховані.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">В інтернеті понад 5 мільярдів людей. 60% вебу — англійською. Різниця була не в техніці, а в грошах. Професійна локалізація коштує від 300 000 ₴ і триває місяць. Тож більшість компаній просто запускають сайт однією мовою й сподіваються на краще.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI скоротив розрив</h2>
+      <p id="t-shift-body">Не машинний переклад, а транскреація. Модель знає, що фраза «наш хомчик працює над цим» не зайде в Японії — і переписує її на жартик, що відгукується в їхній культурі. Вона перетворює $49/місяць у 2 300 ₴ на місяць. Знає, що німецька потребує на 30% більше місця. Арабська дзеркально відображає весь макет, а тайська — не має пропусків між словами.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Вкажіть на ваш билд. Отримайте всі мови.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">Файли HTML отримують атрибути lang і dir. Кожна локалізація має CSS з правильним набором шрифтів, міжрядковим інтервалом і напрямком тексту. Middleware від Vercel автоматично розпізнає Accept-Language. Зробили один деплой — і сервите весь світ.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Ця сторінка — доказ</h2>
+      <p id="t-proof-body">Кожне слово, яке ви читаєте, пройшло через той інструмент, про який йдеться. Натисніть пробіл, щоб прокрутити мови. Японська версія використовує бізнес-ідіоми, які вибрав би носій мови. Перейдіть на арабську — і побачите, як макет дзеркально відображається. Німецька версія довша, бо німецька не вміє коротко. Кожна версія читається, наче її написав носій цієї культури.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Без агентств. Без таблиць Excel. Без реєстрації. Ваші ключі, ваш билд, ваші мови.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">Ліцензія MIT. Ваші ключі, ваш билд, ваші мови.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>пробіл</kbd> перемикання мов
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

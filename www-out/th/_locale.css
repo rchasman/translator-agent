@@ -1,0 +1,8 @@
+/* translator-agent: styles for th */
+:root { --ta-locale: "th"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Thai", "Sarabun", sans-serif;
+  line-height: 1.8;
+  word-break: keep-all;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Globální weby, jeden příkaz</title>
+  <meta name="description" content="AI přepisu přemění váš web na 71 lokalizovaných verzí. Jeden příkaz. 90 vteřin. Bez agentury.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Internet je tu pro všechny. Teď mluví ke každému.</h1>
+      <p id="t-sub">AI přepisu přemění váš web na 71 lokalizovaných verzí. Ne přeloží — ale předělá pro každou kulturu. Každé přirovnání upravené, každý vtip zafunguje, každý písmo a směr textu správně nastavený.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 miliard lidí je online. 60 % webu je v angličtině. Problém nebyl technický — byl ekonomický. Profesionální lokalizace stojí 250 000 Kč a trvá měsíc. Proto většina firem zveřejní web jen v jednom jazyce a doufá, že to stačí.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI ten problém vyřešila</h2>
+      <p id="t-shift-body">Ne strojový překlad — přepisy. Model ví, že "naši křečci na tom pracují" v Japonsku nefunguje — a přeformuluje to do místního vtipu. Ví, že 49 $/měsíc je v japonštině 月額6,980円. Ví, že němčina zabere o 30 % víc místa. Ví, že arabština celý vzhled převrátí a thajština nemá mezery mezi slovy.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Ukázat na vaši verzi. Mít všechny jazyky.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML soubory dostanou atributy lang a dir. Každá lokalizace má své CSS s vhodnými fonty, řádkováním a směrem textu. Middleware pro Vercel automaticky rozezná jazyk z Accept-Language. Nasaďte jednou, obsluhujte svět.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Tahle stránka je důkaz</h2>
+      <p id="t-proof-body">Každé slovo, které čtete, prošlo tím nástrojem, o kterém mluví. Stiskněte mezerník pro přepínání jazyků. Japonská verze používá obchodní obraty, které by tamní rodilý mluvčí zvolil. Přejděte na arabštinu a sledujte, jak se rozvržení převrátí. Němčina je delší — vždycky je. Každá verze zní, jako by ji napsal někdo z té kultury.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Žádná agentura. Žádné tabulky. Žádná registrace. Vaše klíče, vaše verze, vaše jazyky.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">Licence MIT. Vaše klíče, vaše verze, vaše jazyky.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>mezerník</kbd> pro přepínání jazyků
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

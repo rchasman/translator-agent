@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — وب‌سایت‌های جهانی با یک فرمان</title>
+  <meta name="description" content="تبدیل متن به زبان‌های مختلف با هوش مصنوعی؛ سایت شما را در ۷۱ نسخه بومی‌شده ارائه می‌دهد. یک فرمان. ۹۰ ثانیه. بدون نیاز به آژانس.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">وب برای همه ساخته شده بود. اکنون با همه حرف می‌زند.</h1>
+      <p id="t-sub">تبدیل متنی هوشمند هوش مصنوعی، سایت شما را به ۷۱ نسخه بومی‌شده تبدیل می‌کند. ترجمه نیست — بازنویسی براساس فرهنگ هر کشور. هر اصطلاح محلی‌شده، هر شوخی متناسب با فرهنگ، هر زبان و شیوه نگارش به دقت پرداخته شده.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">۵ میلیارد نفر آنلاین هستند. ۶۰٪ وب‌سایت‌ها به انگلیسی‌اند. این فاصله هیچ‌وقت فنی نبود — مشکل اقتصادی بود. بومی‌سازی حرفه‌ای حدود ۱۰ میلیون تومان هزینه و یک ماه زمان می‌برد. بنابراین اکثر شرکت‌ها فقط با یک زبان منتشر می‌کنند و امیدوارند که خوب پیش برود.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">هوش مصنوعی فاصله را بست</h2>
+      <p id="t-shift-body">نه ترجمه ماشینی. بازآفرینی متنی. مدل ما می‌داند که «همسترهای ما دارند رویش کار می‌کنند» در ایران معنی نمی‌دهد — و آن را به یک شوخی متناسب فرهنگ بومی تبدیل می‌کند. می‌داند ۱۰ دلار در ماه، تبدیل می‌شود به ماهی ۳۰۰،۰۰۰ تومان. می‌داند آلمانی ۳۰٪ فضای متن بیشتری می‌طلبد. می‌داند عربی باید کل چیدمان را آینه کند و در فارسی مثل تایلندی فاصله کلمات اهمیت دارد.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">ساخت خود را نشان بده، روی همه زبان‌ها منتشر کن.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">فایل‌های HTML به‌صورت خودکار ویژگی lang و dir دریافت می‌کنند. برای هر زبان، CSS با فونت، فاصله خطوط و جهت متن مناسب تزریق می‌شود. یک میان‌افزار Vercel تشخیص Accept-Language را مدیریت می‌کند. تنها یک بار منتشر کنید، به دنیا خدمت دهید.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">این صفحه خودش بهترین مدرک است</h2>
+      <p id="t-proof-body">هر کلمه‌ای که می‌خوانید توسط ابزاری که همین صفحه را ساخته پردازش شده است. برای مشاهده زبان‌ها کلید فاصله را فشار دهید. نسخه ژاپنی از اصطلاحات رسمی کسب‌وکار استفاده می‌کند که یک بومی‌زبان انتخاب می‌کند. به نسخه عربی بروید و آینه‌آی بودن چیدمان را ببینید. نسخه آلمانی طولانی‌تر است چون همیشه همین‌طور است. تمام نسخه‌ها طوری نوشته شده‌اند که انگار از فرهنگ همان زبان آمده‌اند.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">بدون آژانس. بدون صفحه‌های گسترده. بدون ثبت‌نام. کلیدهای شما، ساخت شما، زبان‌های شما.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">با مجوز MIT. کلیدهای شما، ساخت شما، زبان‌های شما.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> تغییر زبان‌ها
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

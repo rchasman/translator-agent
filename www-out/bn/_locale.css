@@ -1,0 +1,7 @@
+/* translator-agent: styles for bn */
+:root { --ta-locale: "bn"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Bengali", sans-serif;
+  line-height: 1.8;
+}

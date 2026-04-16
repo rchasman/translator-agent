@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="no" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Globale nettsider, én kommando</title>
+  <meta name="description" content="AI-transkreasjon gjør om nettstedet ditt til 71 lokaliserte versjoner. Én kommando. 90 sekunder. Ingen byråer.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Nettet er laget for alle. Nå snakker det til alle.</h1>
+      <p id="t-sub">AI-transkreasjon endrer nettstedet ditt til 71 lokaliserte versjoner. Ikke oversatt — omskrevet for hver kultur. Hver talemåte tilpasset, hver vits som treffer, hvert skriftsystem støttet.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 milliarder mennesker er på nett. 60 % av nettet er på engelsk. Forskjellen har aldri vært teknisk — det har vært økonomisk. Profesjonell lokalisering koster 100 000 kr og tar en måned. Derfor leverer de fleste bedrifter bare på ett språk og håper på det beste.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI lukket gapet</h2>
+      <p id="t-shift-body">Ikke maskinoversettelse. Transkreasjon. Modellen vet at «våre hamstere jobber med saken» ikke fungerer i Japan — og omskriver det til en kulturelt passende vits. Den vet at 49 dollar i måneden blir 6 980 ¥ per måned. Den vet at tysk krever 30 % mer plass. Den vet at arabisk speiler hele designet, og at thai ikke bruker mellomrom mellom ordene.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Pek på byggene dine. Få alle språk.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML-filene får innsprøytet lang- og dir-attributter. Hver lokalitet får CSS med riktig font, linjeavstand og tekstretning. En Vercel-mellomvare håndterer automatisk Accept-Language. Deploy én gang, server verden.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Denne siden er beviset</h2>
+      <p id="t-proof-body">Hvert ord du leser er behandlet av verktøyet det beskriver. Trykk mellomrom for å bla gjennom språk. Den japanske versjonen bruker forretningsuttrykk som en lokal ville valgt. Gå til arabisk og se hvordan layouten speiles. Den tyske versjonen er lengre — det er tysk alltid. Hver versjon føles som om noen fra kulturen har skrevet den.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Ingen byråer. Ingen regneark. Ingen registrering. Dine nøkler, ditt bygg, dine språk.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT-lisensiert. Dine nøkler, ditt bygg, dine språk.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>mellomrom</kbd> bytt språk
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

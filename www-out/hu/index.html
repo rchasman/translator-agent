@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="hu" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Globális weboldalak, egyetlen parancsból</title>
+  <meta name="description" content="MI-alapú szövegújraírás alakítja át oldaladat 71 helyi verzióvá. Egy parancs. 90 másodperc. Nincs ügynökség.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">A web mindenkinek készült. Most mindenkinek szól.</h1>
+      <p id="t-sub">Az MI alapú szövegújraírás 71 helyi verzióvá alakítja az oldalad. Nem csak fordítás — minden kultúrához újraírás. Minden kifejezés a helyére kerül, minden poén célba talál, minden írásrendszerhez igazítva.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 milliárd ember van online. Az internet 60%-a angol nyelvű. A különbség sosem technikai volt — hanem pénzügyi. Egy profi lokalizáció 3 millió forintba kerül, és egy hónapig tart. Így a legtöbb cég egyetlen nyelven indít, és reménykedik.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">Az MI bezárta a szakadékot</h2>
+      <p id="t-shift-body">Nem csak gépi fordításról van szó, hanem szövegújraírásról. A modell tudja, hogy a "mókusaink dolgoznak rajta" nem cseng jól Japánban — ezért egy helyi viccre cseréli. Tudja, hogy 16 000 Ft/hónap helyett 月額6,980円 a megfelelő. Tudja, hogy a német 30%-kal több helyet igényel. Tudja, hogy az arab nyelv tükrözi az egész dizájnt, a thai pedig nem használ szóközöket.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Mutasd az építést. Megkapod az összes nyelvet.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">Az HTML fájlokba bekerülnek a lang és dir attribútumok. Minden nyelvhez a megfelelő betűtípus, sormagasság és szövegirány tartozik. Egy Vercel köztes réteg automatikusan kezeli az Accept-Language felderítést. Egyszer telepíted, és az egész világot kiszolgálod.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Ez az oldal a bizonyíték</h2>
+      <p id="t-proof-body">Minden szó, amit olvasol, ugyanazzal az eszközzel készült, amiről szól. Nyomd meg a space-et, hogy végigpörgesd a nyelveket. A japán verzió üzleti kifejezéseket használ, amilyeneket egy anyanyelvi választana. Nyomj jobbra az arabra, és figyeld, ahogy tükröződik a felület. A német hosszabb, mert a német mindig az. Minden verzió úgy olvasható, mint ha egy helyi írta volna.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Nincs ügynökség. Nincsenek táblázatok. Nincs regisztráció. A kulcsaid, az építésed, a nyelveid.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT licenc alatt. A kulcsaid, az építésed, a nyelveid.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> nyelvek váltása
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

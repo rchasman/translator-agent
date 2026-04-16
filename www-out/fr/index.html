@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Des sites mondiaux, en une seule commande</title>
+  <meta name="description" content="La transcréation par IA transforme votre site en 71 versions localisées. Une commande. 90 secondes. Sans agence.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Le web a été créé pour tous. Aujourd'hui, il parle à chacun.</h1>
+      <p id="t-sub">La transcréation par IA transforme votre site en 71 versions localisées. Pas traduit — réécrit pour chaque culture. Chaque expression adaptée, chaque blague qui fait mouche, chaque système d’écriture maîtrisé.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 milliards de personnes sont en ligne. 60 % du web est en anglais. Le vrai frein n’a jamais été technique, mais économique. Une localisation professionnelle coûte 10 000 € et prend un mois. Du coup, la plupart des entreprises se contentent d’une langue et croisent les doigts.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">L’IA a comblé le fossé</h2>
+      <p id="t-shift-body">Pas de la traduction automatique, mais de la transcréation. Le modèle sait que « nos hamsters y travaillent » ne fait pas rire au Japon — il le remplace par une blague adaptée. Il sait que 49 $/mois devient 49 €/mois. Il sait que l’allemand nécessite 30 % d’espace en plus. Il sait que l’arabe inverse toute la mise en page et que le thaï s’écrit sans espaces entre les mots.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Montrez-lui votre build. Obtenez toutes les langues.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">Les fichiers HTML reçoivent les attributs lang et dir. Chaque version locale a son CSS avec la bonne police, hauteur de ligne et direction du texte. Un middleware Vercel détecte automatiquement la langue préférée dans le navigateur. Déployez une fois, servez le monde entier.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Cette page en est la preuve</h2>
+      <p id="t-proof-body">Chaque mot que vous lisez a été traité par l’outil qu’il décrit. Appuyez sur espace pour passer d’une langue à l’autre. La version japonaise utilise des expressions business choisies par un natif. Fléchez vers l’arabe et regardez la mise en page se refléter. La version allemande est plus longue, comme toujours. Chaque version semble avoir été écrite par quelqu’un de cette culture.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Pas d’agence. Pas de tableurs. Pas d’inscription. Vos clés, votre build, vos langues.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">Licence MIT. Vos clés, votre build, vos langues.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>espace</kbd> changer de langue
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

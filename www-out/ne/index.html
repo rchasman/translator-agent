@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ne" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — विश्वभरका वेबसाइटहरू, एउटै आदेशमा</title>
+  <meta name="description" content="एआई ट्रान्सक्रिएसनले तपाईंको साइटलाई ७१ स्थानीय भाषामा पुनर्लेखन गर्छ। एउटै आदेश, ९० सेकेन्ड, कुनै एजेंशी आवश्यक छैन।">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">वेब सबैका लागि बनेको थियो। अब यो सबैसँग बोल्छ।</h1>
+      <p id="t-sub">एआई ट्रान्सक्रिएसनले तपाईंको साइटलाई ७१ स्थानीय संस्करणहरूमा रूपान्तरण गर्छ। अनुवाद होइन — प्रत्येक संस्कृतिका लागि पुनर्लेखन। प्रत्येक मुहावरा मिलाइन्छ, प्रत्येक जोक पारिस्थितिक बनाइन्छ, प्रत्येक लिपि प्रणालीलाई ध्यान दिइन्छ।</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">५ अर्ब मानिसहरू इन्टरनेटमा छन्। वेबको ६०% अङ्ग्रेजीमा छ। यसको अन्तर कहिले पनि प्रविधि होइन — आर्थिक कारण थियो। व्यावसायिक स्थानीयकरणमा लगभग रु ११,००,००० लाग्छ र एक महिना लाग्छ। अधिकांश कम्पनीहरूले एउटै भाषामा काम चलाउँछन् र आशा गर्छन्।</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">एआईले दूरी मिटायो</h2>
+      <p id="t-shift-body">मेशिन ट्रान्सलेसन होइन। ट्रान्सक्रिएसन हो। मोडेललाई थाहा छ "हाम्रा पिँजडा साँघुरा यसमा मेहनत गर्दैछन्" जापानमा चल्दैन — र यो उपयुक्त हाँस्यमा पुनर्लेखन गर्छ। यो जान्दछ रु ४९ / महिना हुन्छ घण्टामा ६,९८० जापानी येनमा। यो बुझ्छ कि जर्मन भाषामा ३०% बढी ठाउँ चाहिन्छ। यो जान्दछ कि अरबी पुरै लेआउट उल्टो हुन्छ र थाई भाषामा शब्दबीच खाली ठाउँ हुँदैन।</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">तपाईंको निर्माणलाई देखाउनुहोस्। सबै भाषाहरू पाइनेछ।</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML फाइलहरूमा lang र dir एट्रिब्युटहरू थपिन्छ। प्रत्येक स्थानीय संस्करणलाई सही फन्ट, लाइन-हाइट, र पाठको दिशा सहितको CSS प्रदान गरिन्छ। Vercel मिडलवेयरले स्वचालित रूपमा Accept-Language पहिचान गर्छ। एकपटक डिप्लोय गर्नुहोस्, संसारलाई सेवा दिनुहोस्।</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">यो पृष्ठ नै प्रमाण हो</h2>
+      <p id="t-proof-body">तपाईंले पढिरहेको हरेक शब्दले यो उपकरणले प्रशोधित गर्यो। स्पेस थिचेर भाषाहरू परिवर्तन गर्नुहोस्। जापानी संस्करणले व्यवसायिक मुहावराहरू प्रयोग गरेको छ जुन त्यस ठाउँका मान्छेहरू रोज्ने गर्छन्। अरबीमा जानुहोस् र लेआउट उल्टिँदो देख्नुहोस्। जर्मन संस्करण लामो छ किन भने जर्मन सँधै लामो हुन्छ। हरेक संस्करण त्यही संस्कृतिका मानिसहरूले लेखेझैं पढिन्छ।</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">कुनै एजेंसी छैन। कुनै स्प्रेडशीट छैन। कुनै साइनअप छैन। तपाईंका कुञ्जीहरू, तपाईंको निर्माण, तपाईंका भाषाहरू।</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT लाइसेन्स अन्तर्गत। तपाईंका कुञ्जीहरू, तपाईंको निर्माण, तपाईंका भाषाहरू।</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> भाषाहरू सर्कल गर्न
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

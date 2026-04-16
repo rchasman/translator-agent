@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ca" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Webs globals, amb un sol comandament</title>
+  <meta name="description" content="La transcreació amb IA converteix el teu lloc en 71 versions localitzades. Un sol comandament. 90 segons. Sense agència.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">La xarxa es va crear per a tothom. Ara parla amb tothom.</h1>
+      <p id="t-sub">La transcreació amb IA transforma el teu web en 71 versions locals. No es tradueix, es reescriu per a cada cultura. Cada expressió adaptada, cada broma encertada, cada sistema d'escriptura resolt.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 mil milions de persones estan en línia. El 60% del web està en anglès. La barrera mai va ser tècnica — era econòmica. La localització professional costa 10.000 € i triga un mes. Per això moltes empreses només publiquen en un idioma i creuen que això serà suficient.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">La IA ha tancat la bretxa</h2>
+      <p id="t-shift-body">No és una traducció automàtica. És transcreació. El sistema sap que «els nostres hàmsters hi estan treballant» no fa gràcia al Japó — i ho reescriu amb una broma que encaixa culturalment. Sap que 49 $/mes esdevé 6.980 ¥ al mes. Sap que el alemany necessita un 30% més d'espai. Sap que l'àrab inversa tot el disseny i que el tailandès no fa servir espais entre paraules.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Assenyala la teva compilació. Rep tots els idiomes.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">Els arxius HTML incorporen els atributs lang i dir. Cada llengua té un CSS amb la pila de fonts, l'interlineat i la direcció de text adequats. Un middleware de Vercel detecta Automàticament l'Accept-Language. Publica un cop i serveix a tot el món.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Aquesta pàgina en són la prova</h2>
+      <p id="t-proof-body">Cada paraula que llegeixes ha estat processada per l'eina que descriu. Prem espai perquè canviï d'idioma. La versió japonesa fa servir expressions de negoci pròpies d'un parlant nadiu. Canvia a l'àrab i veuràs com es reflecteix el disseny. La versió alemanya és més extensa, com sempre. Cada versió sembla escrita per algú de la cultura respectiva.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Sense agències. Sense fulls de càlcul. Sense registre. Les teves claus, la teva compilació, els teus idiomes.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">Llicència MIT. Les teves claus, la teva compilació, els teus idiomes.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>espai</kbd> per canviar d'idioma
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

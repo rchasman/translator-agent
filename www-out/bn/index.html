@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — বিশ্বব্যাপী ওয়েবসাইট, এক কমান্ডেই</title>
+  <meta name="description" content="AI ট্রান্সক্রিয়েশন আপনার সাইটকে ৭১টি লোকালাইজড সংস্করণে পরিণত করে। এক কমান্ডে। ৯০ সেকেন্ডে। কোন এজেন্সি দরকার নেই।">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">ওয়েবটা সবার জন্য বানানো হয়েছে। এখন এটি সবার বলছে।</h1>
+      <p id="t-sub">AI ট্রান্সক্রিয়েশন আপনার সাইটকে ৭১টি লোকাল সংস্করণে রুপান্তর করে। এটা শুধু অনুবাদ নয় — প্রত্যেক সংস্কৃতির জন্য নতুন করে লেখা। প্রতিটি বাগধারা মানিয়ে নেওয়া, প্রতিটি ঠাট্টা হাসির মতো উপস্থাপনা, প্রতিটি লিপি পদ্ধতি পুরোপুরি সামলানো।</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">৫০ কোটি মানুষ অনলাইনে আছেন। ওয়েবের ৬০% ইংরেজিতেই। ব্যবধানটি কখনো প্রযুক্তিগত ছিল না — এটা ছিল অর্থনৈতিক। পেশাদার লোকালাইজেশনের খরচ হয় ৳১০,০০০ এবং লাগে প্রায় এক মাস। তাই অধিকাংশ কোম্পানি এক ভাষায় সাইট চালিয়ে দেন এবং আশা করেন ভাল হবে।</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI সেই ফাঁক পূরণ করেছে</h2>
+      <p id="t-shift-body">এটা কাজ করে মেশিন অনুবাদ নয়, ট্রান্সক্রিয়েশন দ্বারা। মডেলটি জানে "আমাদের হামস্টাররা এ নিয়ে কাজ করছে" জাপানে হাস্যকর নয় — তাই এটি সংস্কৃতিমুখী উপযুক্ত একটি কৌতুক হিসেবে রচনা করে। এটি জানে $৪৯/মাস পরিবর্তিত হবে মাসিক ৳৬,৯৮০। এটি জানে জার্মান ভাষায় ৩০% বেশি জায়গা লাগে। এটি জানে আরবি সম্পূর্ণ লেআউট লিপিবদ্ধ করে এবং থাই ভাষায় শব্দের মাঝে স্পেস থাকে না।</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">আপনার বিল্ডকে নির্দেশ দিন। সব ভাষাই পান।</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML ফাইলে স্বয়ংক্রিয়ভাবে lang এবং dir অ্যাট্রিবিউট যোগ হয়। প্রত্যেক লোকালের জন্য সরবরাহ করা হয় সঠিক ফন্ট স্ট্যাক, লাইন-হাইট এবং টেক্সট দিকনির্দেশনা সহ CSS। একটি Vercel মিডলওয়্যার স্বয়ংক্রিয়ভাবে Accept-Language শনাক্তকরণ পরিচালনা করে। একবার ডিপ্লয় করুন, সারাবিশ্বে পরিবেশন করুন।</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">এই পাতা তার প্রমাণ</h2>
+      <p id="t-proof-body">যে প্রতিটি শব্দ আপনি পড়ছেন, তা তৈরি করেছে এই সরঞ্জামটি। স্পেস বার চাপুন ভাষা পরিবর্তনের জন্য। জাপানি সংস্করণে ব্যবহার হয়েছে ব্যবসায়িক প্রচলিত বাক্যাংশ যা একজন দেশীয় বাচ্চা বেছে নেবে। আরবিতে এ্যারো চাপুন এবং দেখুন লেআউট পুরোপুরি প্রতিবিম্বিত। জার্মান সংস্করণ বেশি বড় কারণ জার্মান ভাষায় সবসময়ই হয়। প্রতিটি সংস্করণ পড়লে মনে হবে যেন সেই সংস্কৃতির কেউ এটি লিখেছেন।</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">কোন এজেন্সি নয়। কোনো স্প্রেডশীট নয়। কোন সাইনআপ নয়। আপনার কী, আপনার বিল্ড, আপনার ভাষা।</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT লাইসেন্সপ্রাপ্ত। আপনার কী, আপনার বিল্ড, আপনার ভাষা।</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> ভাষা পরিবর্তন করুন
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

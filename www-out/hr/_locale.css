@@ -1,0 +1,7 @@
+/* translator-agent: styles for hr */
+:root { --ta-locale: "hr"; }
+html { direction: ltr; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}

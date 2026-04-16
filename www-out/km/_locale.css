@@ -1,0 +1,7 @@
+/* translator-agent: styles for km */
+:root { --ta-locale: "km"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Khmer", sans-serif;
+  line-height: 2;
+}

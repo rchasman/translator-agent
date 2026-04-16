@@ -1,0 +1,7 @@
+/* translator-agent: styles for ne */
+:root { --ta-locale: "ne"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Devanagari", sans-serif;
+  line-height: 1.8;
+}

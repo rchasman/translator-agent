@@ -1,0 +1,7 @@
+/* translator-agent: styles for el */
+:root { --ta-locale: "el"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans", sans-serif;
+  line-height: 1.6;
+}

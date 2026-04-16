@@ -1,0 +1,7 @@
+/* translator-agent: styles for zh-TW */
+:root { --ta-locale: "zh-TW"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}

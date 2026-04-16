@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="lo" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — ເວັບໄຊທ໌ທົ່ວໂລກ, ຄຳສັ່ງດຽວຕອງໃຈ</title>
+  <meta name="description" content="AI transcreation ແປປ່ຽນເວັບໄຊທ໌ຂອງທ່ານໃຫ້ມີ 71 ຮູບແບບທ້ອງຖຶດ. ຄຳສັ່ງດຽວ. 90 ວິນາທີ. ບໍ່ຈໍາເປັນຕ້ອງມີສົມາຊິກ.</meta>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">ເວັບໄຊທ໌ຖືກສ້າງຂື້ນສໍາລັບທຸກຄົນ. ດຽວນີ້ເວັບໄຊສາມາດສື່ສານກັບທຸກຄົນໄດ້ແລ້ວ.</h1>
+      <p id="t-sub">AI transcreation ແປປ່ຽນເວັບໄຊຂອງທ່ານເປັນ 71 ຮູບແບບທ້ອງຖຶດ. ບໍ່ແມ່ນແປພາສາ — ແຕ່ຂຽນໃໝ່ໃຫ້ເໝາະສົມກັບແຕ່ລະວັດນທະນະທໍາ. ໃຊ້ສິລະປິນພາສາ, ເຄື່ອງຫຍັງຖືກປັບໃຫ້ດີ, ແລະທຸກລະບົບຂຽນຖືກດູແລ.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">ມີຜູ້ຄົນອອນໄລນ໌ 5 ພັນລ້ານຄົນ. 60% ຂອງເວັບໄຊແມ່ນພາສາອັງກິດ. ຊ່ອງຫວ່າງນີ້ບໍ່ແມ່ນດ້ານເທັກນິກ — ແຕ່ແມ່ນດ້ານເງິນ. ການແປພາສາມີຄ່າໃຊ້ຈ່າຍສູງກວ່າ 300,000 ກີບ ແລະ ຕ້ອງໃຊ້ເວລາເປັນເດືອນ. ດັ່ງນັ້ນສ່ວນຫຼາຍບໍລິສັດຈຶ່ງເລືອກໃຊ້ເພີ່ມພາສາໃນພາສາໜຶ່ງ ແລະ ຫາກໃຫ້ດີກໍພໍແລ້ວ.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI ມາປິ່ນປົວຊ່ອງຫວ່າງ</h2>
+      <p id="t-shift-body">ບໍ່ແມ່ນການແປພາສາດ້ວຍເຄື່ອງ ແຕ່ແມ່ນການຂຽນໃໝ່ໃຫ້ເໝາະສົມ. ໂມເດວຂອງພວກເຮົາເຂົ້າໃຈວ່າ "ເຈົ້າຫມາມເກີດ ກຳລັງເຮັດວຽກ" ແມ່ນບໍ່ເໝາະສົມໃນປະເທດຍີ່ປຸ່ນ — ແລະເຂົ້າມາຂຽນໃໝ່ເປັນມິດມະພາບທ້ອງຖຶດ. ມັນຮູ້ວ່າ $49/ເດືອນ ຈະການປ່ຽນເປັນ ລາຄາເດືອນ ປີ 6,980 ເຢນ. ມັນຮູ້ວ່າພາສາເຢຍລະມັນຕ້ອງການພື້ນທີ່ຫຼາຍກວ່າ 30%. ມັນຮູ້ວ່າພາສາອາຣັບຈະສະແດງຜົນແບບກັບກັນທັງໝົດ ແລະ ພາສາໄທບໍ່ມີຊ່ອງຫຍໍ້ລະຫວ່າງຄຳ.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">ເລືອກບັນດາຂອງທ່ານ. ໄດ້ທຸກພາສາ.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">ໄຟລ໌ HTML ຈະໄດ້ຮັບການຄົ້ນພົບພາສາ (lang) ແລະ ການກຳນົດທາງລັບ (dir) ເຂົ້າໄປ. ທຸກພາສາຈະມີເນື້ອຫາ CSS ທີ່ມີຟອນຕ໌ແຖບທີ່ຖືກຕ້ອງ, ຄວາມສູງບົດຂໍ້ຄວາມ, ແລະທາງລັບຂອງຂໍ້ຄວາມ. ມີ Vercel middleware ຈັດການການກວດດູ Accept-Language ອັດຕະໂນມັດ. ເປີດໃຊ້ເທື່ອດຽວ, ໃຫ້ບໍລິການທົ່ວໂລກ.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">ໜ້ານີ້ແມ່ນພິຈາລະນານັກທໍາຄວາມ</h2>
+      <p id="t-proof-body">ທຸກຄໍາທີ່ທ່ານກຳລັງອ່ານນີ້ໄດ້ຖືກຜ່ານການດຳເນີນງານຂອງເຄື່ອງມືນີ້. ກົດ space ເພື່ອສະແດງພາສາຕ່າງໆ. ພາສາຍີ່ປຸ່ນໃຊ້ຄຳພາສາທຸລະກິດທີ່ເຈົ້າເຈົ້າທ້ອງຖຶດເລືອກ. ກົດ arrow ໄປພາສາອາຣັບແລະສະແດງໃຫ້ເຫັນ layout ກັບຄືນ. ພາສາເຢຍລະມັນຍາວກວ່າພາສາອື່ນເພາະມນູມັນແມ່ນແບບນັ້ນ. ທຸກຮູບແບບອ່ານເຫັນເຫັນຄືກັນກັບຄົນທ່ານອະໄວ່ດັ່ງຮູບແບບນັ້ນ.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">ບໍ່ມີສົມາຊິກ. ບໍ່ມີແຜນລາຍການ. ບໍ່ຕ້ອງລົງທະບຽນ. ກຸ່ມກະແຈຂອງທ່ານ, ການສ້າງຂອງທ່ານ, ພາສາຂອງທ່ານ.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">ໃບອະນຸຍາດ MIT. ກຸ່ມກະແຈຂອງທ່ານ, ການສ້າງຂອງທ່ານ, ພາສາຂອງທ່ານ.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> ເລື່ອນພາສາ
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

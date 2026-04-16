@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="kk" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Әлемдік сайттар, бір командамен</title>
+  <meta name="description" content="AI transcreation сіздің сайтыңызды 71 локализацияланған нұсқаға айналдырады. Бір команда. 90 секунд. Агенттік қажет емес.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Веб бәріміз үшін жасалды. Енді бәріне сөйлейді.</h1>
+      <p id="t-sub">AI transcreation сайтыңызды 71 мәдениетке лайықтап қайта жазады. Аударма емес — әр мәдениетке бейімделген жаңа мәтін. Әр мақал-мәтел, әр әзіл, әр жазу жүйесі ойдағыдай үйлестірілген.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 миллиард адам интернетте. Вебтің 60%-ы ағылшын тілінде. Ажыратым технологияда емес — экономикалық себепте еді. Кәсіби локализация шамамен 5 000 000 ₸ тұрады да, бір айға созылады. Сондықтан көп компаниялар бір тілде шығарып, сәттілікке үміттенеді.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI бұл алшақтықты жапты</h2>
+      <p id="t-shift-body">Машина аудармасы емес, transcreation. Модель «біздің хомяктар жұмыс жасап жатыр» деген сөздің Жапонияда ұнамайтынын біледі — және оны сол мәдениетке сәйкес әзілге айналдырады. Ай сайынғы 49$ 6 980₸-ға айналады. Неміс тілі 30% артық орын қажет ететінін білесің. Араб тілі бүкіл орналасымды айнаға айналдырады, ал тай тілі сөз арасында бос орынсыз болады.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Жинағыңызды көрсетіңіз. Барлық тілді алыңыз.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML файлдарына lang және dir атрибуттары енгізіледі. Әр локальге дұрыс қаріп жиынтығы, жол биіктігі және мәтін бағыты бар CSS беріледі. Vercel аралық бағдарламасы Accept-Language-ты автоматты анықтайды. Бір рет орналастырыңыз, әлемді қамтамасыз етіңіз.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Бұл бет дәлел</h2>
+      <p id="t-proof-body">Сіз оқып отырған барлық сөз осы құралмен өңделді. Тілдерді ауыстыру үшін бос орынды басыңыз. Жапон нұсқасы жергілікті тілші таңдаған іскерлік сөздерді пайдаланады. Араб тіліне ауысып, орналасымның қалай айнаға айналатынын көріңіз. Неміс нұсқасы әрқашан ұзақ болады. Әр нұсқа сол мәдениеттің кісісі жазғандай оқылады.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Агенттік жоқ. Кестелер жоқ. Тіркелу керек емес. Сіздің кілттеріңіз, сіздің жинағыңыз, сіздің тілдеріңіз.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT лицензиясы. Сіздің кілттеріңіз, сіздің жинағыңыз, сіздің тілдеріңіз.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> тілдерді ауыстыру
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

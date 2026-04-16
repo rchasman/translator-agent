@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Sites globais, um comando só</title>
+  <meta name="description" content="Transcriação por IA transforma seu site em 71 versões locais. Um comando. 90 segundos. Sem agência.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">A web foi feita para todos. Agora fala com todos.</h1>
+      <p id="t-sub">A transcriação por IA transforma seu site em 71 versões locais. Não é tradução — é reescrita para cada cultura. Cada expressão adaptada, cada piada acertada, cada sistema de escrita contemplado.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 bilhões de pessoas estão online. 60% da web está em inglês. A barreira nunca foi técnica — foi econômica. Localização profissional custa R$ 50.000 e leva um mês. Por isso a maioria das empresas lança em apenas um idioma e torce para dar certo.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">A IA eliminou essa barreira</h2>
+      <p id="t-shift-body">Não é tradução automática. É transcriação. O modelo sabe que "nossos hamsters estão trabalhando nisso" não funciona no Japão — e reescreve como uma piada culturalmente adequada. Sabe que R$ 250,00/mês vira R$ 250,00/mês. Sabe que alemão precisa de 30% mais espaço. Sabe que árabe inverte toda a página e o tailandês não usa espaços entre as palavras.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Aponte para sua build. Receba todos os idiomas.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">Arquivos HTML recebem atributos lang e dir automaticamente. Cada idioma ganha CSS com a fonte, altura de linha e direção de texto corretos. Um middleware do Vercel detecta o Accept-Language sozinho. Faça o deploy uma vez, sirva o mundo todo.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Esta página é a prova</h2>
+      <p id="t-proof-body">Cada palavra que você lê foi processada pela própria ferramenta que descreve. Pressione espaço para alternar os idiomas. A versão japonesa usa expressões de negócio escolhidas por nativos. Vá para o árabe e veja a página se espelhar. A versão alemã é mais longa, porque alemão é sempre assim. Cada versão parece escrita por alguém daquela cultura.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Sem agência. Sem planilhas. Sem cadastro. Suas chaves, sua build, seus idiomas.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">Licença MIT. Suas chaves, sua build, seus idiomas.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> alternar idiomas
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Globalni sajtovi, jedna komanda</title>
+  <meta name="description" content="AI transkreacija pretvara vaš sajt u 71 lokalizovanu verziju. Jedna komanda. 90 sekundi. Bez agencije.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Internet je za sve. Sada govori na sve načine.</h1>
+      <p id="t-sub">AI transkreacija pretvara vaš sajt u 71 prilagođenu verziju. Ne prevodi — prepravi za svaku kulturu. Svaki izraz prilagođen, svaka šala pogodjena, svaki sistem pisma podržan.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 milijardi ljudi je na mreži. 60% interneta je na engleskom. Razlika nikad nije bila tehnička — već ekonomska. Profesionalna lokalizacija košta 1.200.000 дин. i traje mesec dana. Zato većina firmi izbaci sajt na jednom jeziku i nada se najboljem.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI je zatvorio razmak</h2>
+      <p id="t-shift-body">Nije mašinski prevod. Transkreacija. Model zna da "naši hrčci rade na tome" ne funkcioniše u Japanu — pa to prebaci u lokalnu duhovitu dosetku. Zna da $49 mesečno postaje 6.980円 mesečno. Zna da nemački zahteva 30% više mesta. Zna da arapski okreće celu stranicu i da tajlandski nema razmake među rečima.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Pokažite gde je vaš sajt. Dobijte sve jezike.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML fajlovima se ubacuju atributi lang i dir. Svaka lokalizacija dobija CSS sa odgovarajućim fontom, razmakom između redova i smerom teksta. Vercel middleware automatski prepoznaje Accept-Language. Postavite jednom, služite celom svetu.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Ova stranica je dokaz</h2>
+      <p id="t-proof-body">Sve reči koje čitate obrađene su pomoću ovog alata. Pritisnite razmak da promenite jezik. Japanska verzija koristi poslovne izraze koje bi izabrao izvorni govornik. Pređite na arapski i pratite kako se cela stranica zrcali. Nemačka verzija je duža jer nemački je uvek takav. Svaka verzija izgleda kao da ju je napisao neko iz te kulture.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Bez agencija. Bez tabela. Bez prijave. Vaši ključevi, vaš sajt, vaši jezici.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT licenca. Vaši ključevi, vaš sajt, vaši jezici.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>razmak</kbd> menjajte jezike
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

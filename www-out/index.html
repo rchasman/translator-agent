@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Global websites, one command</title>
+  <meta name="description" content="AI transcreation turns your site into 71 localized versions. One command. 90 seconds. No agency.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">The web was built for everyone. Now it speaks to everyone.</h1>
+      <p id="t-sub">AI transcreation turns your site into 71 localized versions. Not translated — rewritten for each culture. Every idiom adapted, every joke landed, every script system handled.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 billion people are online. 60% of the web is in English. The gap was never technical — it was economic. Professional localization costs $10,000 and takes a month. So most companies just ship in one language and hope for the best.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI closed the gap</h2>
+      <p id="t-shift-body">Not machine translation. Transcreation. The model knows that "our hamsters are working on it" doesn't land in Japan — and rewrites it as a culturally appropriate joke. It knows $49/month becomes 月額6,980円. It knows German needs 30% more space. It knows Arabic mirrors the entire layout and Thai has no spaces between words.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Point at your build. Get every language.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML files get lang and dir attributes injected. Every locale gets CSS with the correct font stack, line-height, and text direction. A Vercel middleware handles Accept-Language detection automatically. Deploy once, serve the world.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">This page is the proof</h2>
+      <p id="t-proof-body">Every word you are reading was processed by the tool it describes. Press space to cycle through languages. The Japanese version uses business idioms a native speaker would choose. Arrow to Arabic and watch the layout mirror. The German version is longer because German always is. Every version reads like someone from that culture wrote it.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">No agency. No spreadsheets. No signup. Your keys, your build, your languages.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT Licensed. Your keys, your build, your languages.</p>
+    <p class="credit">Text measurement by <a href="https://github.com/chenglou/pretext" target="_blank">pretext</a> — DOM-free layout in every script.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> cycle languages
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

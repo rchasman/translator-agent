@@ -1,0 +1,7 @@
+/* translator-agent: styles for ta */
+:root { --ta-locale: "ta"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Tamil", sans-serif;
+  line-height: 1.8;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="lv" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Globālas vietnes, viena komanda</title>
+  <meta name="description" content="AI transkreācija pārvērš jūsu vietni 71 lokalizētā versijā. Viena komanda. 90 sekundes. Bez aģentūras.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Tīkls radīts visiem. Tagad tas runā ar visiem.</h1>
+      <p id="t-sub">AI transkreācija pārvērš jūsu vietni 71 lokalizētā versijā. Ne vienkārši tulkots — pārveidots katrai kultūrai. Katrs teiciens pielāgots, katrs joks trāpīts, katrs rakstību sistēmas īpatnība ņemta vērā.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">Tiešsaistē ir 5 miljardi cilvēku. 60% interneta satur angļu valodā. Atšķirība nekad nav bijusi tehniska — tā ir ekonomiska. Profesionāla lokalizācija maksā 10 000 € un prasa mēnesi. Tāpēc lielākā daļa uzņēmumu izvieto saturu tikai vienā valodā un tur cer vislabāko.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI izlīdzināja plaisu</h2>
+      <p id="t-shift-body">Ne mašīntulkošana. Transkreācija. Modelis saprot, ka "mūsu ērcēdāji jau strādā pie tā" Japānā nedarbosies — tāpēc pārveido to par kultūrai atbilstošu joku. Tas zina, ka €49/mēnesī kļūst par 6 980 ¥ mēnesī. Tas zina, ka vācu valodai vajag par 30% vairāk vietas. Zin, ka arābu valoda spoguļo visu izkārtojumu, bet taizemiešu valodā vārdi rakstīti bez atstarpēm.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Norādi savu projektu. Saņem visas valodas.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML failos tiek ielikti lang un dir atribūti. Katram lokalizētajam versijas tiek pievienots CSS ar pareizu fontu komplektu, līnijas augstumu un teksta virzienu. Vercel starpprogrammatūra automātiski atpazīst Accept-Language. Vienreiz izvieto, pasniedz pasaulei.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Šī lapa ir pierādījums</h2>
+      <p id="t-proof-body">Katrs vārds, ko Jūs lasāt, ir apstrādāts ar pašu aprakstīto rīku. Nospiediet atstarpes taustiņu, lai pārietu cauri valodām. Japāņu versija izmanto biznesa izteicienus, ko izvēlētos vietējs runātājs. Dodieties uz arābu versiju un vērojiet, kā izkārtojums apgriežas. Vācu versija ir garāka, jo vācu valoda tāda arī ir. Katra versija lasās kā kāds no šīs kultūras to būtu uzrakstījis.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Bez aģentūras. Bez izklājlapām. Bez reģistrācijas. Jūsu taustiņi, jūsu projekts, jūsu valodas.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT licence. Jūsu taustiņi, jūsu projekts, jūsu valodas.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>atstarpe</kbd> valodu izvēle
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

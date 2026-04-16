@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Website toàn cầu, chỉ với một lệnh</title>
+  <meta name="description" content="Trí tuệ nhân tạo giúp chuyển thể trang web của bạn thành 71 phiên bản địa phương hóa. Chỉ một lệnh. 90 giây. Không cần công ty trung gian.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Web được tạo ra cho tất cả mọi người. Giờ đây nó nói với mọi người.</h1>
+      <p id="t-sub">Trí tuệ nhân tạo chuyển thể trang web của bạn thành 71 phiên bản địa phương hóa. Không phải dịch thuật — mà viết lại theo từng văn hóa. Mọi thành ngữ đều được điều chỉnh, mọi câu chuyện cười đều vừa vặn, mọi kiểu chữ đều xử lý chuẩn xác.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 tỷ người đang dùng Internet. 60% nội dung web bằng tiếng Anh. Khoảng cách không phải vấn đề kỹ thuật — mà là kinh tế. Dịch thuật chuyên nghiệp tốn khoảng 230 triệu đồng và mất tới một tháng. Vì vậy, đa số doanh nghiệp chỉ chạy web một ngôn ngữ rồi hy vọng mọi thứ ổn.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI thu hẹp khoảng cách</h2>
+      <p id="t-shift-body">Không phải dịch máy. Mà là chuyển thể. Mô hình hiểu rằng câu "những chú chuột hamster của chúng tôi đang làm việc" không hợp với người Nhật — nên sẽ viết lại thành câu chuyện cười phù hợp văn hóa. Nó biết 49 USD/tháng tương đương khoảng 1.200.000₫. Nó biết tiếng Đức cần diện tích chữ nhiều hơn 30%. Nó biết tiếng Ả Rập phải lật ngược giao diện, và tiếng Thái thì không có khoảng trắng giữa các từ.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Chỉ điểm vào bản dựng. Lấy mọi ngôn ngữ.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">Các file HTML sẽ được thêm thuộc tính lang và dir. Mỗi ngôn ngữ có CSS với font chữ, khoảng cách dòng và chiều văn bản chuẩn. Một middleware của Vercel tự động nhận diện Accept-Language. Triển khai một lần, phục vụ toàn cầu.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Trang này chính là bằng chứng</h2>
+      <p id="t-proof-body">Mỗi chữ bạn đang đọc đều được công cụ này xử lý. Nhấn phím cách để chuyển đổi ngôn ngữ. Phiên bản tiếng Nhật dùng thành ngữ thương mại người bản xứ chọn. Chuyển sang tiếng Ả Rập để xem giao diện phản chiếu. Phiên bản tiếng Đức dài hơn vì Đức vốn vậy. Mỗi phiên bản đọc lên như do một người trong văn hóa đó viết ra.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Không qua công ty trung gian. Không bảng tính. Không cần đăng ký. Chìa khóa bạn giữ, bản dựng bạn làm, ngôn ngữ bạn chọn.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">Giấy phép MIT. Chìa khóa bạn giữ, bản dựng bạn làm, ngôn ngữ bạn chọn.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>space</kbd> chuyển ngôn ngữ
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+/* translator-agent: styles for ar */
+:root { --ta-locale: "ar"; }
+html { direction: rtl; }
+body {
+  font-family: "Noto Naskh Arabic", "Geeza Pro", Tahoma, sans-serif;
+  line-height: 1.9;
+  font-size: 110%;
+}
+/* RTL adjustments */
+[dir="rtl"] { text-align: right; }

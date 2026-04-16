@@ -1,0 +1,7 @@
+/* translator-agent: styles for te */
+:root { --ta-locale: "te"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Telugu", sans-serif;
+  line-height: 1.8;
+}

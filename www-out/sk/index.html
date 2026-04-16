@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sk" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Globálne weby, jedným príkazom</title>
+  <meta name="description" content="AI transkreácia premení vašu stránku na 71 lokalizovaných verzií. Jeden príkaz. 90 sekúnd. Žiadna agentúra.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Web bol stvorený pre všetkých. Teraz rozpráva všetkými jazykmi.</h1>
+      <p id="t-sub">AI transkreácia premení vašu stránku na 71 lokalizovaných verzií. Nie preklad - prepísané pre každú kultúru. Každé príslovie prispôsobené, každý vtip sadne, každý písomný systém zvládnutý.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">Online je 5 miliárd ľudí. 60 % webu je v angličtine. Prekážka nebola technická – bola ekonomická. Profesionálna lokalizácia stojí 10 000 € a zaberie mesiac. Väčšina firiem tak jednoducho ponúkne jeden jazyk a dúfa, že sa to podarí.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI tú priepasť zacelila</h2>
+      <p id="t-shift-body">Nie strojový preklad. Transkreácia. Model vie, že „naši škrečky na tom pracujú“ u nás nezafunguje – a nahradí to kultúrne vhodným vtípkom. Vie, že 49 €/mesiac sa premení na 6 980 JPY mesačne. Vie, že nemčina potrebuje o 30 % viac miesta. Vie, že arabčina obracia celú stránku zrkadlovo a thajčina nemá medzery medzi slovami.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Ukáž na svoj zostavený web. Získaj každý jazyk.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML súbory dostanú vložené atribúty lang a dir. Každá lokalizácia má CSS s vhodným fontom, výškou riadku a smerom textu. Middleware od Vercelu automaticky rozpozná jazyk v prehliadači. Nasadíš raz, slúžiš svetu.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Táto stránka je dôkaz</h2>
+      <p id="t-proof-body">Každé slovo, ktoré čítaš, prešlo spracovaním nástrojom, o ktorom hovorí. Stlač medzerník a prepínaj jazyky. Japonská verzia používa obchodné frázy tak, ako by ich zvolil domáci. Prejdi na arabčinu a sleduj, ako sa stránka zrkadlovo otočí. Nemčina je dlhšia – ako vždy. Každá verzia pôsobí, akoby ju písal niekto priamo z danej kultúry.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Žiadna agentúra. Žiadne tabuľky. Žiadna registrácia. Vaše kľúče, váš zostavený web, vaše jazyky.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">Licencované pod MIT. Vaše kľúče, váš zostavený web, vaše jazyky.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>medzerník</kbd> prepína jazyky
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

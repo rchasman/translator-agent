@@ -1,0 +1,9 @@
+/* translator-agent: styles for he */
+:root { --ta-locale: "he"; }
+html { direction: rtl; }
+body {
+  font-family: "Noto Sans Hebrew", Arial, sans-serif;
+  line-height: 1.6;
+}
+/* RTL adjustments */
+[dir="rtl"] { text-align: right; }

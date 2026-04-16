@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Globale Webseiten, ein Befehl</title>
+  <meta name="description" content="KI-Transkreation verwandelt Ihre Seite in 71 lokalisierte Versionen. Ein Befehl. 90 Sekunden. Keine Agentur.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Das Web wurde für alle gebaut. Jetzt spricht es jeden an.</h1>
+      <p id="t-sub">KI-Transkreation verwandelt Ihre Seite in 71 lokalisierte Versionen. Nicht übersetzt – für jede Kultur neu geschrieben. Jedes Sprichwort angepasst, jeder Witz sitzt, jedes Schriftsystem berücksichtigt.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 Milliarden Menschen sind online. 60 % des Webs sind auf Englisch. Das Problem war nie technisch – sondern finanziell. Professionelle Lokalisierung kostet 10.000 € und dauert einen Monat. Daher bieten die meisten Firmen ihre Seite nur in einer Sprache an und hoffen aufs Beste.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">KI schließt die Lücke</h2>
+      <p id="t-shift-body">Keine maschinelle Übersetzung, sondern Transkreation. Das Modell weiß, dass "Unsere Hamster arbeiten daran" in Japan nicht ankommt – und schreibt es als passenden, kulturellen Witz um. Es weiß, dass 49 $/Monat zu 6.980 ¥ pro Monat wird. Es weiß, dass Deutsch 30 % mehr Platz braucht. Es weiß, dass Arabisch das ganze Layout spiegelt und Thai keine Leerzeichen zwischen den Worten hat.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Zeig auf dein Build. Bekomme jede Sprache.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML-Dateien werden mit lang- und dir-Attributen versehen. Jede Locale erhält CSS mit passender Schriftfamilie, Zeilenhöhe und Textausrichtung. Eine Vercel-Middleware erkennt Accept-Language automatisch. Einmal deployen, die ganze Welt bedienen.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Diese Seite ist der Beweis</h2>
+      <p id="t-proof-body">Jedes Wort, das Sie gerade lesen, wurde vom beschriebenen Tool verarbeitet. Drücken Sie Leertaste, um die Sprachen durchzuschalten. Die japanische Version verwendet branchentypische Redewendungen, wie sie ein Muttersprachler wählen würde. Wechseln Sie zu Arabisch und beobachten Sie, wie das Layout gespiegelt wird. Die deutsche Version ist länger, weil Deutsch immer etwas umfangreicher ist. Jede Version liest sich so, als hätte sie ein Einheimischer geschrieben.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Keine Agenturen. Keine Tabellenkalkulationen. Keine Anmeldung. Ihre Keys, Ihr Build, Ihre Sprachen.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT-lizenziert. Ihre Keys, Ihr Build, Ihre Sprachen.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>Leertaste</kbd> Sprachen wechseln
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

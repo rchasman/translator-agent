@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fi" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Globaaleja verkkosivuja yhdellä käskyllä</title>
+  <meta name="description" content="Tekoäly muokkaa sivustosi 71 paikallistetuksi versioksi. Yhdellä käskyllä. 90 sekunnissa. Ei toimistoja.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Verkko on rakennettu kaikille. Nyt se puhuu kaikille.</h1>
+      <p id="t-sub">Tekoäly muokkaa sivustosi 71 kulttuurisesti kustomoiduksi versioksi. Ei käännetty – uudelleenkirjoitettu kullekin yleisölle. Joka idiomi mukautettu, joka vitsi paikalleen, jokainen kirjoitusjärjestelmä kohdallaan.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 miljardia ihmistä on verkossa. 60 % verkosta on englanniksi. Ongelmana ei koskaan ollut teknologia – se oli raha. Ammattilaiskäännös maksaa 10 000 euroa ja vie kuukauden. Siksi suurin osa firmoista julkaisee vain yhdellä kielellä ja toivoo parasta.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">Tekoäly kavensi kuilun</h2>
+      <p id="t-shift-body">Ei konekäännös. Uudelleenkirjoitus. Malle tunnistaa, ettei "meidän hamsterimme hoitavat homman" toimi Japanissa – ja keksii tilalle kulttuuriin sopivan vitsin. Se kääntää 49 $ / kuukaudessa kätevästi 6 980 ¥ per kuukaudeksi. Se ymmärtää, että saksa tarvitsee 30 % enemmän tilaa. Se kääntää arabiaksi peilikielelle ja tajuaa, ettei thai-tekstissä ole välilyöntejä sanojen välillä.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Osota rakennetta. Saat kaikki kielet.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">HTML-tiedostoihin lisätään lang- ja dir-attribuutit. Jokaiselle kielelle tulee CSS, jossa on oikea fonttipino, riviväli ja tekstin suunta. Vercelin middleware hoitaa Accept-Language -tunnistuksen automaattisesti. Julkaise kerran, palvele koko maailmaa.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Tämä sivu on todiste</h2>
+      <p id="t-proof-body">Jokainen kohta, mitä luet, on käsitelty työkalulla, jota se kuvaa. Paina välilyöntiä vaihtaaksesi kieliä. Japanin versio käyttää bisneskielen idiomeja kuin natiivi. Siirry nuolella arabiaksi ja katso, miten sivun asettelu peilautuu. Saksan versio on pidempi, koska saksa on aina pidempi. Jokainen versio tuntuu kuin sitä olisi kirjoittanut paikallinen.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Ei toimistoja. Ei taulukoita. Ei rekisteröitymistä. Sinun avaimet, sinun julkaisu, sinun kielet.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT-lisensoitu. Sinun avaimet, sinun julkaisu, sinun kielet.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>välilyönti</kbd> vaihtaa kielet
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

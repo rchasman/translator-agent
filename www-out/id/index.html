@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Situs global, satu perintah saja</title>
+  <meta name="description" content="AI transcreation mengubah situs Anda menjadi 71 versi lokal. Satu perintah. 90 detik. Tanpa agen.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Web dibuat untuk semua orang. Kini berbicara untuk semua orang.</h1>
+      <p id="t-sub">AI transcreation mengubah situs Anda menjadi 71 versi lokal. Bukan hanya diterjemahkan — ditulis ulang sesuai budaya masing-masing. Setiap idiom disesuaikan, setiap lelucon pas, setiap sistem tulisan ditangani dengan tepat.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 miliar orang online. 60% konten web berbahasa Inggris. Bukan masalah teknis — ini soal ekonomi. Lokal profesional harganya Rp150 juta dan butuh sebulan. Jadi kebanyakan perusahaan pasang satu bahasa dan berharap hasil terbaik.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI menutup celah itu</h2>
+      <p id="t-shift-body">Bukan terjemahan mesin biasa. Ini transcreation. Sistem tahu kalau "hamster kami sedang bekerja" nggak nyambung di Jepang — lalu menggantinya dengan lelucon yang cocok budaya setempat. Dia tahu $49/bulan berubah jadi Rp699.000/bulan. Dia tahu bahasa Jerman butuh ruang 30% lebih banyak. Dia tahu bahasa Arab membalik tata letak dan Thai tidak menggunakan spasi antar kata.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Tunjuk ke build Anda. Dapatkan semua bahasa.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">File HTML secara otomatis disisipkan atribut lang dan dir. Setiap bahasa mendapatkan CSS dengan font, jarak baris, dan arah teks yang tepat. Middleware Vercel mengatur deteksi Accept-Language otomatis. Deploy sekali, layani seluruh dunia.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Halaman ini adalah buktinya</h2>
+      <p id="t-proof-body">Setiap kata yang Anda baca diproses oleh alat yang dijelaskan ini. Tekan spasi untuk berganti bahasa. Versi Jepang pakai idiom bisnis yang dipilih penutur asli. Geser ke Arab dan lihat tata letak berbalik. Versi Jerman lebih panjang, karena memang begitu sifat bahasa Jerman. Setiap versi terasa seperti ditulis oleh orang dari budaya tersebut.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Tanpa agen. Tanpa spreadsheet. Tanpa daftar. Kunci Anda, build Anda, bahasa Anda.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">MIT Licensed. Kunci Anda, build Anda, bahasa Anda.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>spasi</kbd> ganti bahasa
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>

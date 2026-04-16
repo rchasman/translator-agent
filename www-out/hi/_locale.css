@@ -1,0 +1,7 @@
+/* translator-agent: styles for hi */
+:root { --ta-locale: "hi"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans Devanagari", sans-serif;
+  line-height: 1.8;
+}

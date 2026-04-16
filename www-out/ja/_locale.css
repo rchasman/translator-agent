@@ -1,0 +1,7 @@
+/* translator-agent: styles for ja */
+:root { --ta-locale: "ja"; }
+html { direction: ltr; }
+body {
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  line-height: 1.8;
+}

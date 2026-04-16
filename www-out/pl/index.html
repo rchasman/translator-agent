@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>translator-agent — Globalne strony, jedno polecenie</title>
+  <meta name="description" content="AI transkreacja zamienia Twoją stronę w 71 wersji lokalizowanych. Jedno polecenie. 90 sekund. Bez agencji.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <span class="logo">translator-agent</span>
+    <div id="locale-bar"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="t-hero">Internet jest dla wszystkich. Teraz mówi do każdego.</h1>
+      <p id="t-sub">AI transkreacja przekształca Twoją stronę w 71 wersji lokalnych. Nie tłumaczone — przepisane pod każdą kulturę. Każde powiedzenie dopasowane, każdy żart trafiony, każdy system pisma obsłużony.</p>
+    </section>
+
+    <section>
+      <p id="t-gap" class="large">5 miliardów ludzi jest online. 60% internetu jest po angielsku. Przepaść nie była techniczna — była ekonomiczna. Profesjonalna lokalizacja kosztuje 40 000 zł i trwa miesiąc. Dlatego większość firm publikuje w jednym języku i trzyma kciuki.</p>
+    </section>
+
+    <section>
+      <h2 id="t-shift">AI zamyka przepaść</h2>
+      <p id="t-shift-body">To nie jest zwykłe tłumaczenie maszynowe. To transkreacja. Model wie, że "nasi chomiki nad tym pracują" nie zagrają w Japonii — i tworzy odpowiedni kulturowo żart. Wie, że $49/miesiąc to 月額6,980円. Wie, że niemiecki potrzebuje 30% więcej miejsca. Wie, że arabski odwraca cały układ, a tajski nie ma spacji między słowami.</p>
+    </section>
+
+    <section>
+      <h2 id="t-how">Wskaż swój build. Otrzymaj wszystkie języki.</h2>
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-how-body">Pliki HTML otrzymują atrybuty lang i dir. Każda lokalizacja dostaje CSS z właściwą czcionką, wysokością linii i kierunkiem tekstu. Middleware Vercel automatycznie wykrywa preferencje językowe. Wdróż raz, obsługuj cały świat.</p>
+    </section>
+
+    <section>
+      <h2 id="t-proof">Ta strona to dowód</h2>
+      <p id="t-proof-body">Każde słowo, które czytasz, przeszło przez opisane narzędzie. Naciśnij spację, by zmieniać języki. Wersja japońska używa biznesowych idiomów, jakby pisał rodowity użytkownik. Przejdź do arabskiego i zobacz, jak układ się odwraca. Niemiecka wersja jest dłuższa, bo tak zawsze jest po niemiecku. Każda wersja brzmi jakby napisała ją osoba z danej kultury.</p>
+    </section>
+
+    <section class="cta">
+      <div class="terminal">
+        <code>bunx translator-agent -s ./dist -l all</code>
+      </div>
+      <p id="t-cta">Bez agencji. Bez arkuszy kalkulacyjnych. Bez rejestracji. Twoje klucze, Twój build, Twoje języki.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="t-foot">Na licencji MIT. Twoje klucze, Twój build, Twoje języki.</p>
+  </footer>
+
+  <div id="hint" aria-hidden="true">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>spacja</kbd> przełącz języki
+  </div>
+
+  <script type="module" src="js/app.bundle.js"></script>
+</body>
+</html>
