@@ -37,8 +37,13 @@
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.69",
     "@ai-sdk/openai": "^3.0.53",
+    "@types/express": "^5.0.6",
+    "@x402/core": "^2.10.0",
+    "@x402/evm": "^2.10.0",
+    "@x402/express": "^2.10.0",
     "ai": "^6.0.164",
     "commander": "^14.0.3",
+    "express": "^5.2.1",
     "p-limit": "^7.3.0",
     "zod": "^4.3.6"
   }
