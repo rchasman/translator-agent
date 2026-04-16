@@ -29,7 +29,9 @@ export const FORMAT_INSTRUCTIONS: Record<ScannedFile["type"], string> = {
   html: "This is an HTML file. Preserve all HTML tags and attributes. Translate text content only.",
 };
 
-const buildUserPrompt = (locale: string, file: ScannedFile): string =>
+export type TranslatableContent = Pick<ScannedFile, "content" | "type">;
+
+export const buildUserPrompt = (locale: string, file: TranslatableContent): string =>
   `Target locale: ${locale}
 
 ${FORMAT_INSTRUCTIONS[file.type]}
@@ -41,11 +43,66 @@ ${file.content}
 
 export const TranslationSchema = z.object({
   translated: z.string().describe("The fully transcreated content in the target locale"),
-  notes: z
-    .array(z.string())
-    .describe("Brief notes on cultural adaptations made, if any")
-    .optional(),
 });
+
+// ── Shared job runner — used by both local and remote paths ──────────
+
+export type TranslateJobOptions = {
+  files: ScannedFile[];
+  locales: string[];
+  concurrency?: number;
+  onProgress?: (completed: number, total: number, locale: string, file: string) => void;
+  translateFn: (locale: string, file: ScannedFile) => Promise<TranslationResult>;
+};
+
+type JobResult =
+  | { ok: true; result: TranslationResult }
+  | { ok: false; locale: string; file: string; error: string };
+
+export const runTranslationJobs = async ({
+  files,
+  locales,
+  concurrency = 10,
+  onProgress,
+  translateFn,
+}: TranslateJobOptions): Promise<TranslationResult[]> => {
+  const limit = pLimit(concurrency);
+  const tasks = locales.flatMap((locale) =>
+    files.map((file) => ({ locale, file }))
+  );
+  const total = tasks.length;
+  let completed = 0;
+
+  const outcomes: JobResult[] = await Promise.all(
+    tasks.map(({ locale, file }) =>
+      limit(async (): Promise<JobResult> => {
+        try {
+          const result = await translateFn(locale, file);
+          completed++;
+          onProgress?.(completed, total, locale, file.relativePath);
+          return { ok: true, result };
+        } catch (err) {
+          completed++;
+          const msg = err instanceof Error ? err.message : String(err);
+          console.error(`  [FAIL] ${locale}/${file.relativePath}: ${msg}`);
+          return { ok: false, locale, file: file.relativePath, error: msg };
+        }
+      })
+    )
+  );
+
+  const failures = outcomes.filter((o): o is Extract<JobResult, { ok: false }> => !o.ok);
+  if (failures.length > 0) {
+    console.error(`\n${failures.length} translation(s) failed:`);
+    console.error(failures.map((f) => `  ${f.locale}/${f.file}: ${f.error}`).join("\n"));
+  }
+
+  return outcomes
+    .filter((o): o is Extract<JobResult, { ok: true }> => o.ok)
+    .map((o) => o.result);
+};
+
+// ── Local translation (BYOK) ────────────────────────────────────────
 
 const translateFile = async (
   model: LanguageModel,
@@ -59,11 +116,7 @@ const translateFile = async (
     prompt: buildUserPrompt(locale, file),
   });
 
-  return {
-    locale,
-    file,
-    translated: object.translated,
-  };
+  return { locale, file, translated: object.translated };
 };
 
 export type TranslateOptions = {
@@ -74,30 +127,8 @@ export type TranslateOptions = {
   onProgress?: (completed: number, total: number, locale: string, file: string) => void;
 };
 
-export const translate = async ({
-  model,
-  files,
-  locales,
-  concurrency = 10,
-  onProgress,
-}: TranslateOptions): Promise<TranslationResult[]> => {
-  const limit = pLimit(concurrency);
-  const tasks = locales.flatMap((locale) =>
-    files.map((file) => ({ locale, file }))
-  );
-  const total = tasks.length;
-  let completed = 0;
-
-  const results = await Promise.all(
-    tasks.map(({ locale, file }) =>
-      limit(async () => {
-        const result = await translateFile(model, locale, file);
-        completed++;
-        onProgress?.(completed, total, locale, file.relativePath);
-        return result;
-      })
-    )
-  );
-
-  return results;
-};
+export const translate = (opts: TranslateOptions): Promise<TranslationResult[]> =>
+  runTranslationJobs({
+    ...opts,
+    translateFn: (locale, file) => translateFile(opts.model, locale, file),
+  });
