@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "www-out",
+  "framework": null,
+  "buildCommand": "bun install && bun build www/js/app.js --outfile www-out/js/app.bundle.js --minify"
+}

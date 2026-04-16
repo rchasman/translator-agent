@@ -7,7 +7,6 @@ dist
 *.tgz
 example/output
 example/site-output
-www-out
 www-test-out
 
 # code coverage
