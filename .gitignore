@@ -7,7 +7,6 @@ dist
 *.tgz
 example/output
 example/site-output
-translations
 www-out
 
 # code coverage
@@ -39,3 +38,4 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # IDE
 .cursor
+.vercel
