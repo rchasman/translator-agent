@@ -1,7 +1,8 @@
 import { generateObject } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { z } from "zod";
-import { SYSTEM_PROMPT, FORMAT_INSTRUCTIONS, TranslationSchema } from "../../src/translator.ts";
+import { SYSTEM_PROMPT, TranslationSchema, buildUserPrompt } from "../../src/translator.ts";
+import type { ScannedFile } from "../../src/scanner.ts";
 
 export const RequestSchema = z.object({
   content: z.string(),
@@ -16,7 +17,7 @@ export const translateContent = async (content: string, locale: string, type: st
     model,
     schema: TranslationSchema,
     system: SYSTEM_PROMPT,
-    prompt: `Target locale: ${locale}\n\n${FORMAT_INSTRUCTIONS[type as keyof typeof FORMAT_INSTRUCTIONS]}\n\nSource content:\n\`\`\`\n${content}\n\`\`\``,
+    prompt: buildUserPrompt(locale, { content, type: type as ScannedFile["type"] }),
   });
 
   const totalTokens = usage?.totalTokens ?? 0;
@@ -24,7 +25,6 @@ export const translateContent = async (content: string, locale: string, type: st
 
   return {
     translated: object.translated,
-    notes: object.notes,
     locale,
     usage: { totalTokens, cost: `$${cost.toFixed(6)}` },
   };
