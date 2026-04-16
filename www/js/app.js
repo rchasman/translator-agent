@@ -1,10 +1,10 @@
 // translator-agent — instant language morphing
-// Heights normalized across locales. Outliers get font-size shrunk to fit.
-// No masks, no fades, no animations. Pure instant swap.
+// Pretext measures ALL locales without DOM reflow. Pure canvas + arithmetic. Fast.
+import { prepare, layout } from '@chenglou/pretext'
 
 const RTL = new Set(['ar', 'he', 'fa', 'ur'])
 const PREFIX = 't-'
-const MAX_GROWTH = 1.6 // container can grow up to 60% beyond English — outliers shrink to fit
+const MAX_GROWTH = 1.6
 const CANDIDATES = [
   'ja', 'ar', 'de', 'fr', 'ko', 'pt-BR', 'zh-CN', 'es', 'hi', 'ru',
   'th', 'vi', 'it', 'nl', 'tr', 'pl', 'sv', 'uk', 'el', 'cs',
@@ -35,6 +35,12 @@ const translatableEls = (root = document) =>
 
 const extractTexts = doc =>
   translatableEls(doc).reduce((acc, el) => ({ ...acc, [el.id]: el.innerHTML }), {})
+
+const toPlain = html => {
+  const d = document.createElement('div')
+  d.innerHTML = html
+  return d.textContent || ''
+}
 
 const basePath = () =>
   (document.documentElement.lang || 'en') === 'en' ? '.' : '..'
@@ -73,80 +79,122 @@ const discover = async () => {
   state.index = 0
 }
 
-// --- precompute ---
+// --- pretext measurement: no DOM reflows, pure canvas + arithmetic ---
+
+const pretextMeasure = (text, fontWeight, fontFamily, size, width, lhRatio) => {
+  const font = `${fontWeight} ${size}px ${fontFamily}`
+  const p = prepare(text, font)
+  return layout(p, width, size * lhRatio).height
+}
 
 const precompute = () => {
   const els = translatableEls()
-  const probe = document.createElement('div')
-  probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:0;'
-  document.body.appendChild(probe)
+  const t0 = performance.now()
 
+  // one DOM read per element to snapshot geometry + typography
   const info = els.map(el => {
     const cs = getComputedStyle(el)
     const fontSize = parseFloat(cs.fontSize)
-    const lhRatio = parseFloat(cs.lineHeight) / fontSize
     return {
       id: el.id,
       enHeight: el.offsetHeight,
       fontSize,
-      // line-height as ratio so it scales with font-size changes during binary search
-      css: `width:${el.clientWidth}px;font-family:${cs.fontFamily};font-weight:${cs.fontWeight};font-size:${cs.fontSize};line-height:${lhRatio};letter-spacing:${cs.letterSpacing};`,
+      lhRatio: parseFloat(cs.lineHeight) / fontSize,
+      fontWeight: cs.fontWeight,
+      fontFamily: cs.fontFamily,
+      width: el.clientWidth,
     }
   })
 
-  info.map(({ id, enHeight, fontSize, css }) => {
-    // measure every locale at natural font-size to find the cap
+  // all measurement from here is pretext — zero DOM reflows
+  info.map(({ id, enHeight, fontSize, lhRatio, fontWeight, fontFamily, width }) => {
+    // measure every locale at natural font-size
     const localeHeights = {}
     state.locales.map(locale => {
       const texts = state.texts[locale]
       if (!texts?.[id]) return
-      probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:0;${css}`
-      probe.innerHTML = texts[id]
-      localeHeights[locale] = probe.offsetHeight
+      try {
+        localeHeights[locale] = pretextMeasure(toPlain(texts[id]), fontWeight, fontFamily, fontSize, width, lhRatio)
+      } catch {}
     })
 
-    // container height: capped at MAX_GROWTH × English height
+    // container = capped max
     const cap = Math.ceil(enHeight * MAX_GROWTH)
     const maxNatural = Math.max(...Object.values(localeHeights), enHeight)
     const containerH = Math.min(maxNatural, cap)
     state.heights[id] = containerH
 
-    // for EVERY locale: fit font-size so text fills the container exactly
-    // short text → grow font, long text → shrink font
+    // fit each locale: proportional correction (2-3 prepare() calls, not 20)
     state.locales.map(locale => {
       const texts = state.texts[locale]
       if (!texts?.[id]) return
-
       const naturalH = localeHeights[locale]
-      if (Math.abs(naturalH - containerH) < 3) return // already fits
+      if (!naturalH || Math.abs(naturalH - containerH) < 4) return
 
       if (!state.fits[locale]) state.fits[locale] = {}
-      probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:0;${css}`
-      probe.innerHTML = texts[id]
+      const plain = toPlain(texts[id])
 
-      // binary search: largest font-size that fits within containerH
-      let lo = fontSize * 0.4, hi = fontSize * 2
-      for (let i = 0; i < 20; i++) {
-        const mid = (lo + hi) / 2
-        probe.style.fontSize = `${mid}px`
-        if (probe.offsetHeight > containerH - 4) hi = mid
-        else lo = mid
+      // proportional guess + correction — much faster than binary search
+      let fs = fontSize * (containerH / naturalH)
+      let h = pretextMeasure(plain, fontWeight, fontFamily, fs, width, lhRatio)
+
+      // correct twice for sub-line-boundary accuracy
+      if (Math.abs(h - containerH) > 4) {
+        fs = fs * (containerH / h)
+        h = pretextMeasure(plain, fontWeight, fontFamily, fs, width, lhRatio)
       }
-      // knock off 5% to guarantee no clipping
-      state.fits[locale][id] = Math.floor(lo * 0.95 * 10) / 10
+      if (Math.abs(h - containerH) > 4) {
+        fs = fs * (containerH / h)
+      }
+
+      // 8% safety margin — pretext canvas may differ slightly from CSS rendering
+      state.fits[locale][id] = Math.floor(fs * 0.92 * 10) / 10
     })
   })
-
-  document.body.removeChild(probe)
 
   // lock heights
   els.map(el => {
     el.style.height = `${state.heights[el.id]}px`
     el.style.overflow = 'hidden'
   })
+
+  const pretextMs = performance.now() - t0
+
+  // DOM verification pass — catch any pretext mismatches, shrink until they fit
+  const probe = document.createElement('div')
+  probe.style.cssText = 'position:absolute;visibility:hidden;top:-9999px;left:0;'
+  document.body.appendChild(probe)
+
+  info.map(({ id, fontSize, lhRatio, fontWeight, fontFamily, width }) => {
+    const containerH = state.heights[id]
+    const baseCss = `width:${width}px;font-family:${fontFamily};font-weight:${fontWeight};line-height:${lhRatio};letter-spacing:0;`
+
+    state.locales.map(locale => {
+      const texts = state.texts[locale]
+      if (!texts?.[id]) return
+      const fs = state.fits[locale]?.[id] || fontSize
+
+      probe.style.cssText = `position:absolute;visibility:hidden;top:-9999px;left:0;${baseCss}font-size:${fs}px;`
+      probe.innerHTML = texts[id]
+
+      let size = fs
+      while (probe.offsetHeight > containerH && size > 6) {
+        size *= 0.93
+        probe.style.fontSize = `${size}px`
+      }
+
+      if (size !== fs) {
+        if (!state.fits[locale]) state.fits[locale] = {}
+        state.fits[locale][id] = Math.floor(size * 10) / 10
+      }
+    })
+  })
+
+  document.body.removeChild(probe)
+  console.log(`precompute: ${state.locales.length} locales × ${els.length} elements — pretext ${pretextMs.toFixed(0)}ms, total ${(performance.now() - t0).toFixed(0)}ms`)
 }
 
-// --- transition: instant swap + update URL ---
+// --- transition: instant swap ---
 
 const transitionTo = index => {
   const locale = state.locales[index]
@@ -168,7 +216,6 @@ const transitionTo = index => {
       el.style.textAlign = isRTL ? 'right' : ''
     })
 
-  // sync URL
   const url = new URL(location.href)
   if (locale === 'en') url.searchParams.delete('locale')
   else url.searchParams.set('locale', locale)
@@ -221,14 +268,12 @@ const init = async () => {
   setupInput()
   document.getElementById('hint')?.classList.add('visible')
 
-  // restore locale from URL
   const urlLocale = new URL(location.href).searchParams.get('locale')
   if (urlLocale) {
     const idx = state.locales.indexOf(urlLocale)
     if (idx >= 0) transitionTo(idx)
   }
 
-  // reveal — everything is measured and locked
   document.body.classList.add('ready')
 }
 

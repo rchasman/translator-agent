@@ -154,6 +154,17 @@ footer {
 
 footer p { font-size: 0.8rem; }
 
+.credit {
+  font-size: 0.7rem;
+  margin-top: 0.5rem;
+}
+
+.credit a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* ---- Cycle hint ---- */
 
 #hint {
