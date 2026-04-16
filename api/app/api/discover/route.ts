@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { MAX_PRICE, NETWORK, PAY_TO } from "../../lib/x402";
+import { MAX_PRICE, NETWORK, PAY_TO } from "../../../lib/x402";
 
 export const GET = async () =>
   NextResponse.json({

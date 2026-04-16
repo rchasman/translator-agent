@@ -17,4 +17,4 @@ const handler = async (request: NextRequest) => {
   return NextResponse.json(result);
 };
 
-export const POST = withX402(handler, routeConfig, resourceServer);
+export const POST = withX402(handler as (request: NextRequest) => Promise<NextResponse>, routeConfig, resourceServer);
