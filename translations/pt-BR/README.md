@@ -1,18 +1,18 @@
 # translator-agent
 
-O problema de US$ 10 mil de localização, resolvido em 90 segundos.
+O problema de localização de R$ 50.000, resolvido em 90 segundos.
 
-As empresas pagam às agências R$ 0,50 a R$ 1,25 por palavra para localizar seus sites. Um site de 5 mil palavras para 10 idiomas custa R$ 25 mil a R$ 60 mil e leva de 2 a 4 semanas. Toda vez que você muda um título, o cronômetro zera.
+Empresas pagam para agências R$ 0,50–1,25 por palavra para localizar seus sites. Um site de 5.000 palavras para 10 idiomas custa R$ 25.000–60.000 e leva 2–4 semanas. Toda vez que você muda um título, o cronômetro zera.
 
-Esta ferramenta faz isso em um comando, para 71 idiomas, durante a sua build:
+Esta ferramenta faz isso em um comando, para 71 idiomas, durante o seu build:
 
 ```bash
 bunx translator-agent -s ./dist -l all
 ```
 
-Sem agência. Sem planilhas. Sem dependência de fornecedor. Sem cadastro. Suas chaves, sua build, seus idiomas.
+Sem agência. Sem planilhas. Sem vendor lock-in. Sem cadastro. Suas chaves, seu build, seus idiomas.
 
-> **Você está lendo a prova.** Este README foi traduzido rodando `bunx translator-agent -s README.md -l all`. Vá ler a [versão japonesa](./translations/ja/README.md) — ela não apenas traduziu "o cronômetro zera", mas substituiu por uma expressão empresarial japonesa. A [versão alemã](./translations/de/README.md) é 30% maior porque alemão sempre é. A [versão árabe](./translations/ar/README.md) lê da direita para esquerda. A [versão portuguesa brasileira](./translations/pt-BR/README.md) soa como se um brasileiro tivesse escrito, porque essa é a ideia.
+> **Você está lendo a prova.** Este README foi traduzido rodando `bunx translator-agent -s README.md -l all`. Vai ler a [versão japonesa](./translations/ja/README.md) — ela não só traduziu "o cronômetro zera", ela substituiu por um idioma empresarial japonês. A [versão alemã](./translations/de/README.md) é 30% mais longa porque alemão sempre é. A [versão árabe](./translations/ar/README.md) lê da direita para esquerda. A [versão brasileira](./translations/pt-BR/README.md) soa como se um brasileiro escreveu, porque esse é o ponto.
 >
 > [ja](./translations/ja/README.md) | [de](./translations/de/README.md) | [ar](./translations/ar/README.md) | [ko](./translations/ko/README.md) | [fr](./translations/fr/README.md) | [pt-BR](./translations/pt-BR/README.md) | [todos os 71...](./translations/)
 
@@ -22,46 +22,46 @@ Sem agência. Sem planilhas. Sem dependência de fornecedor. Sem cadastro. Suas 
 
 Tradução é um problema resolvido. Localização não é.
 
-O Google Translate consegue transformar "Nossos hamsters estão trabalhando nisso" em japonês. O que ele não consegue é reconhecer que a piada não cola no Japão, e substituir por algo que funciona — tipo referenciar a equipe de engenharia fazendo uma virada, que é tanto culturalmente apropriado quanto engraçado no contexto.
+O Google Translate consegue transformar "Nossos hamsters estão trabalhando nisso" em japonês. O que ele não consegue fazer é reconhecer que a piada não funciona no Japão, e trocar por algo que funciona — tipo referenciar a equipe de engenharia virando a madrugada, que é tanto culturalmente apropriado quanto engraçado no contexto.
 
-Esta ferramenta não traduz. Ela **recria** — o mesmo processo que agências de publicidade cobram R$ 250 mil para adaptar campanhas entre mercados. Só que o LLM já sabe todas as culturas, expressões idiomáticas e convenções de formatação. Ele sabe que:
+Esta ferramenta não traduz. Ela **transcria** — o mesmo processo que agências de publicidade cobram R$ 250.000 para adaptar uma campanha entre mercados. Só que a LLM já conhece todas as culturas, todos os idiomas, todas as convenções de formatação. Ela sabe que:
 
-- `$49/month` vira `月額6.980円` no Japão — não "$49" com um símbolo de iene enfiado
+- `R$ 49/mês` vira `月額6,980円` no Japão — não "R$ 49" com um símbolo de iene colado
 - Sarcasmo mata em inglês e morre em japonês formal
-- "Afogando em papelada" vira "noyade administrative" em francês — uma expressão francesa real, não tradução palavra por palavra
-- Alemães mantêm a piada do hamster porque Hamsterrad (roda de hamster) é uma expressão alemã de verdade
-- Brasileiros precisam do registro casual ou soa como se um robô tivesse escrito
+- "Drowning in paperwork" vira "noyade administrative" em francês — uma expressão francesa real, não tradução palavra por palavra
+- Alemães mantêm a piada do hamster porque Hamsterrad (roda de hamster) é um idioma alemão de verdade
+- Brasileiros precisam do registro casual ou soa que foi um robô que escreveu
 
-O modelo classifica cada string. Labels de UI levam tradução direta. Textos de marketing são adaptados. Humor é totalmente recriado para a cultura de destino.
+O modelo classifica cada string. Labels de UI ganham tradução direta. Copy de marketing é adaptado. Humor é completamente recriado para a cultura de destino.
 
 ---
 
 ## O que acontece quando você roda
 
-Aponte para sua build. Ele clona toda a árvore de arquivos por localidade — traduzindo arquivos de texto, copiando assets estáticos e gerando tudo o que é necessário para deploy:
+Aponte para o output do seu build. Ele clona a árvore inteira de arquivos por locale — traduzindo arquivos de texto, copiando assets estáticos, e gerando tudo que precisa para deploy:
 
 ```
 seu-site/                           translations/
-  index.html                          middleware.ts        ← detecção de localidade
+  index.html                          middleware.ts        ← detecção de locale
   about.html             →            _locales.css         ← tipografia por script
   css/style.css                       ja/
-  js/app.js                             index.html         ← lang="ja", recriado
+  js/app.js                             index.html         ← lang="ja", transcriado
   images/logo.png                       about.html
-                                        _locale.css        ← Noto Sans JP, altura 1.8
+                                        _locale.css        ← Noto Sans JP, 1.8 line-height
                                         css/style.css      ← copiado
                                         js/app.js          ← copiado
                                         images/logo.png    ← copiado
                                       ar/
                                         index.html         ← lang="ar" dir="rtl"
-                                        _locale.css        ← Noto Naskh Arabic, 110% fonte
+                                        _locale.css        ← Noto Naskh Arabic, 110% font
                                         ...
                                       de/
                                         ...
 ```
 
-Todo arquivo HTML recebe `lang` e `dir="rtl"` injetado. Toda localidade ganha CSS com a pilha de fontes correta, altura de linha e direção do texto. Um middleware do Vercel é gerado que lê `Accept-Language` e reescreve para a localidade certa.
+Todo arquivo HTML ganha `lang` e `dir="rtl"` injetados. Todo locale ganha CSS com o font stack correto, line-height, e direção de texto. Um middleware do Vercel é gerado que lê `Accept-Language` e redireciona para o locale certo.
 
-Deploy no Vercel. Um usuário em Tóquio vê japonês com Hiragino Sans em altura 1.8. Um usuário no Cairo vê árabe RTL com Noto Naskh em tamanho 110%. Um usuário em Bangkok vê tailandês com `word-break: keep-all` porque tailandês não tem espaços. Sem configuração.
+Faz deploy no Vercel. Um usuário em Tóquio vê japonês com Hiragino Sans a 1.8 line-height. Um usuário no Cairo vê árabe RTL com Noto Naskh a 110% de tamanho. Um usuário em Bangkok vê tailandês com `word-break: keep-all` porque tailandês não tem espaços. Zero config.
 
 ---
 
@@ -94,24 +94,24 @@ Pronto. 142 arquivos traduzidos, 284 arquivos estáticos copiados em 94s
 }
 ```
 
-Todo deploy sai em 71 idiomas. Traduções são artefatos de build — cacheados, regenerados apenas quando o source muda.
+Todo deploy sai em 71 idiomas. Traduções são artefatos de build — cachados, regenerados só quando a fonte muda.
 
 ---
 
 ## Traga suas próprias chaves ou não
 
 ```bash
-# Você tem chaves — roda local, você paga seu provedor de LLM diretamente
+# Você tem chaves — roda local, você paga direto pro provedor LLM
 export ANTHROPIC_API_KEY=sk-...
 bunx translator-agent -s ./dist -l all
 
-# Você não tem chaves — só funciona
-# Automaticamente usa o serviço hospedado
-# Pague por tradução com USDC via x402 — sem cadastro, sem conta
+# Você não tem chaves — simplesmente funciona
+# Usa automaticamente o serviço hospedado
+# Paga por tradução com USDC via x402 — sem cadastro, sem conta
 bunx translator-agent -s ./dist -l all
 ```
 
-Mesmo comando. Se chaves de API estão presentes, roda local com seu provedor. Se não, bate na API hospedada e paga por request via [x402](https://x402.org) — o protocolo HTTP 402 de pagamento. Seu cliente paga USDC na Base, recebe traduções de volta. Sem auth, sem relacionamento com fornecedor, sem faturas.
+Mesmo comando. Se as chaves de API estão presentes, roda local com seu provedor. Se não, bate na API hospedada e paga por request via [x402](https://x402.org) — o protocolo de pagamento HTTP 402. Seu cliente paga USDC na Base, recebe traduções de volta. Sem auth, sem relacionamento com vendor, sem faturas.
 
 Suporta Anthropic e OpenAI. Traga qualquer modelo que quiser:
 
@@ -127,14 +127,14 @@ A ferramenta não só traduz texto — ela sabe como cada sistema de escrita ren
 
 | Script | O que muda | Por quê |
 |---|---|---|
-| **Árabe, Hebraico, Farsi, Urdu** | `dir="rtl"`, fontes RTL, tamanho 110% | Árabe precisa de tipo maior para ser legível; layout inteiro espelha |
-| **Japonês, Chinês, Coreano** | Pilhas de fontes CJK, altura 1.8 | Caracteres são quadrados de largura fixa; precisam de respiração vertical |
-| **Hindi, Bengali, Tamil, Telugu** | Fontes índicas, altura 1.8 | Traços superiores (shirorekha) precisam de espaço vertical extra |
-| **Tailandês** | `word-break: keep-all` | Sem espaços entre palavras — o browser precisa de regras de quebra de linha explícitas |
-| **Birmanês** | Altura 2.2 | Glifos mais altos de qualquer script principal |
-| **Khmer** | Altura 2.0 | Clusters de consoantes subscritas empilham verticalmente |
+| **Árabe, Hebraico, Farsi, Urdu** | `dir="rtl"`, fontes RTL, 110% de tamanho | Árabe precisa de tipo maior para ser legível; layout inteiro espelha |
+| **Japonês, Chinês, Coreano** | Font stacks CJK, 1.8 line-height | Caracteres são quadrados de largura fixa; precisam de respiro vertical |
+| **Hindi, Bengali, Tamil, Telugu** | Fontes índicas, 1.8 line-height | Traços superiores (shirorekha) precisam de espaço vertical extra |
+| **Tailandês** | `word-break: keep-all` | Sem espaços entre palavras — o navegador precisa de regras explícitas de quebra de linha |
+| **Birmanês** | 2.2 line-height | Glifos mais altos de qualquer script principal |
+| **Khmer** | 2.0 line-height | Clusters de consoantes subscritas empilham verticalmente |
 
-CSS gerado por localidade:
+CSS gerado por locale:
 
 ```css
 /* ar/_locale.css */
@@ -150,11 +150,11 @@ body {
 
 ## Cache
 
-Traduções são artefatos de build. Gere no build time, cache a saída, pule quando o source não mudou.
+Traduções são artefatos de build. Gere em build time, faça cache do output, pule quando a fonte não mudou.
 
 ### Vercel
 
-Vercel cacheia saída de build automaticamente. Adicione `postbuild` e você terminou:
+O Vercel faz cache do output de build automaticamente. Adicione `postbuild` e pronto:
 
 ```json
 {
@@ -180,7 +180,7 @@ Vercel cacheia saída de build automaticamente. Adicione `postbuild` e você ter
     ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 ```
 
-Source inalterado = hit de cache = zero chamadas de LLM = zero custo.
+Fonte inalterada = cache hit = zero chamadas LLM = zero custo.
 
 ---
 
@@ -190,23 +190,23 @@ Source inalterado = hit de cache = zero chamadas de LLM = zero custo.
 Uso: translator-agent [opções]
 
 Opções:
-  -s, --source <caminho>      diretório ou arquivo fonte para escanear
-  -l, --locales <localidades> localidades de destino, separadas por vírgula ou "all" para 71 idiomas
-  -o, --output <caminho>      diretório de saída (padrão: "./translations")
-  -p, --provider <nome>       anthropic | openai (padrão: "anthropic")
-  -m, --model <id>            sobrescrita do modelo
-  -c, --concurrency <n>       máx chamadas paralelas de LLM (padrão: 10)
-  --api-url <url>             URL do serviço hospedado (auto-usada quando sem chaves API)
+  -s, --source <path>      diretório ou arquivo fonte para escanear
+  -l, --locales <locales>  locales de destino, separados por vírgula ou "all" para 71 idiomas
+  -o, --output <path>      diretório de output (padrão: "./translations")
+  -p, --provider <name>    anthropic | openai (padrão: "anthropic")
+  -m, --model <id>         override do modelo
+  -c, --concurrency <n>    máx chamadas LLM paralelas (padrão: 10)
+  --api-url <url>          URL do serviço hospedado (auto-usado quando sem chaves API)
 ```
 
 | Extensão | Estratégia |
 |---|---|
-| `.json` | Traduz valores, preserva chaves |
-| `.md` / `.mdx` | Traduz texto, preserva sintaxe |
-| `.html` / `.htm` | Traduz texto, preserva tags, injeta `lang`/`dir` |
-| Todo o resto | Copia para cada diretório de localidade |
+| `.json` | Traduzir valores, preservar chaves |
+| `.md` / `.mdx` | Traduzir texto, preservar sintaxe |
+| `.html` / `.htm` | Traduzir texto, preservar tags, injetar `lang`/`dir` |
+| Todo o resto | Copiar para cada diretório de locale |
 
-### Todas as 71 localidades
+### Todos os 71 locales
 
 `-l all` cobre ~95% dos usuários de internet: zh-CN, zh-TW, ja, ko, vi, th, id, ms, fil, my, hi, bn, ta, te, mr, gu, kn, ml, pa, ur, fa, tr, he, ar, kk, uz, fr, de, es, pt, pt-BR, it, nl, ca, gl, sv, da, no, fi, is, pl, cs, sk, hu, ro, bg, hr, sr, sl, uk, ru, lt, lv, et, el, ga, sw, am, ha, yo, zu, af, km, lo, ne, si, ka, az, mn
 
