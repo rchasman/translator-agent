@@ -1,5 +1,7 @@
-// translator-agent — DOM-fitted instant language morphing
-// Zero animation. Text morphs in place. Heights locked. Font-sizes adapt via DOM measurement.
+// translator-agent — instant language morphing with pretext overflow fade
+// Text morphs in place. Heights locked. Font-sizes adapt via DOM measurement.
+// Overflow text fades via CSS mask, powered by pretext height analysis.
+import { prepare, layout } from '@chenglou/pretext'
 
 const RTL = new Set(['ar', 'he', 'fa', 'ur'])
 const PREFIX = 't-'
@@ -8,7 +10,6 @@ const CANDIDATES = [
   'th', 'vi', 'it', 'nl', 'tr', 'pl', 'sv', 'uk', 'el', 'cs',
 ]
 
-// Google Fonts for non-Latin scripts (loaded at init for correct measurement)
 const GFONTS = {
   ja: 'Noto+Sans+JP:wght@400;700',
   ko: 'Noto+Sans+KR:wght@400;700',
@@ -73,18 +74,15 @@ const discover = async () => {
   state.index = 0
 }
 
-// --- DOM measurement: find font-size that fills target height ---
-// Uses a hidden probe element — same rendering engine as the real page = zero divergence.
+// --- precompute: DOM measurement for font-size fitting ---
 
 const precompute = () => {
   const els = translatableEls()
 
-  // create offscreen probe
   const probe = document.createElement('div')
   probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:0;'
   document.body.appendChild(probe)
 
-  // snapshot each element's geometry + styles
   const info = els.map(el => {
     const cs = getComputedStyle(el)
     state.heights[el.id] = el.offsetHeight
@@ -93,12 +91,10 @@ const precompute = () => {
       height: el.offsetHeight,
       width: el.clientWidth,
       fontSize: parseFloat(cs.fontSize),
-      // copy all typographic styles to probe
       css: `width:${el.clientWidth}px;font-family:${cs.fontFamily};font-weight:${cs.fontWeight};line-height:${cs.lineHeight};letter-spacing:${cs.letterSpacing};`,
     }
   })
 
-  // for every locale, binary search font-size via DOM measurement
   state.locales.map(locale => {
     const texts = state.texts[locale]
     if (!texts) return
@@ -110,12 +106,11 @@ const precompute = () => {
       probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:0;${css}`
       probe.innerHTML = texts[id]
 
-      // binary search: find largest font-size where text fits within target height
-      let lo = fontSize * 0.5, hi = fontSize * 1.5
+      // barely shrink — max 5%. Let pretext fade mask handle overflow gracefully
+      let lo = fontSize * 0.95, hi = fontSize
       for (let i = 0; i < 20; i++) {
         const mid = (lo + hi) / 2
         probe.style.fontSize = `${mid}px`
-        // 1px safety margin to prevent sub-pixel overflow clipping
         if (probe.offsetHeight > height - 1) hi = mid
         else lo = mid
       }
@@ -127,7 +122,41 @@ const precompute = () => {
   document.body.removeChild(probe)
 }
 
-// --- transition: instant, synchronous, one paint frame ---
+// --- pretext: detect overflow and apply fade mask ---
+
+const applyFadeMask = (el) => {
+  const containerH = state.heights[el.id]
+  if (!containerH) return
+
+  const cs = getComputedStyle(el)
+  const text = el.textContent || ''
+  const font = cs.font
+  const maxW = el.clientWidth
+  const lh = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.7
+
+  try {
+    const p = prepare(text, font)
+    const { height: textH } = layout(p, maxW, lh)
+
+    if (textH > containerH + 4) {
+      // overflow — apply gradient mask: fully visible up to fadeStart, then fade out
+      const fadeStart = Math.max(50, ((containerH - lh * 1.5) / containerH) * 100)
+      const mask = `linear-gradient(to bottom, black 0%, black ${fadeStart}%, transparent 100%)`
+      el.style.maskImage = mask
+      el.style.webkitMaskImage = mask
+    } else {
+      // fits — no mask needed
+      el.style.maskImage = 'none'
+      el.style.webkitMaskImage = 'none'
+    }
+  } catch {
+    // pretext failed — no mask
+    el.style.maskImage = 'none'
+    el.style.webkitMaskImage = 'none'
+  }
+}
+
+// --- transition: instant swap + async fade mask ---
 
 const transitionTo = index => {
   const locale = state.locales[index]
@@ -142,21 +171,28 @@ const transitionTo = index => {
   if (!state.locked) {
     els.map(el => {
       el.style.height = `${state.heights[el.id]}px`
-      el.style.overflow = 'hidden'
     })
     state.locked = true
   }
 
-  // single synchronous batch — one browser paint, no font-family swap (avoids FOIT flash)
+  // instant swap — single synchronous batch
+  // set lang but keep page layout LTR always — RTL only on text elements (no layout jitter)
   document.documentElement.lang = locale
-  document.documentElement.dir = RTL.has(locale) ? 'rtl' : 'ltr'
+  const isRTL = RTL.has(locale)
 
   els.filter(el => texts[el.id] != null).map(el => {
     el.innerHTML = texts[el.id]
     el.style.fontSize = fits[el.id] ? `${fits[el.id]}px` : ''
+    el.dir = isRTL ? 'rtl' : ''
+    el.style.textAlign = isRTL ? 'right' : ''
   })
 
   updateBar()
+
+  // async: apply pretext fade masks (non-blocking, next frame)
+  requestAnimationFrame(() => {
+    els.filter(el => texts[el.id] != null).map(applyFadeMask)
+  })
 }
 
 // --- ui ---
@@ -198,7 +234,6 @@ const init = async () => {
 
   if (state.locales.length <= 1) return
 
-  // load ALL locale fonts before pre-computing
   await Promise.all(state.locales.map(loadFont))
   await document.fonts.ready
 

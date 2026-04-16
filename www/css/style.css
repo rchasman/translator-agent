@@ -8,7 +8,7 @@
   --measure: 42rem;
 }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; transition: none !important; animation: none !important; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { font-size: 17px; }
 
@@ -82,9 +82,9 @@ main {
   padding: 2rem 1.5rem 4rem;
 }
 
-section { margin-bottom: 4rem; }
+section { margin-bottom: 1.5rem; }
 
-.hero { padding-top: 7rem; margin-bottom: 5rem; }
+.hero { padding-top: 5rem; margin-bottom: 2rem; }
 
 h1 {
   font-size: clamp(2rem, 5vw, 3.2rem);
@@ -92,20 +92,20 @@ h1 {
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--accent);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 h2 {
   font-size: 1.35rem;
   font-weight: 600;
   color: var(--accent);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   letter-spacing: -0.01em;
 }
 
 p {
   color: var(--dim);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 
 p.large {
@@ -179,15 +179,15 @@ footer p { font-size: 0.8rem; }
   margin: 0 0.1rem;
 }
 
-/* ---- Locked text containers (pretext-fitted) ---- */
+/* ---- Locked text containers — overflow fades via mask ---- */
 
-/* ---- RTL ---- */
+[id^="t-"] {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 100%);
+}
 
-[dir="rtl"] main { direction: rtl; }
-[dir="rtl"] #nav { flex-direction: row-reverse; }
-[dir="rtl"] #locale-bar { justify-content: flex-start; }
-[dir="rtl"] .terminal { direction: ltr; text-align: left; }
-[dir="rtl"] footer { text-align: right; }
+/* ---- RTL text (per-element, page layout stays LTR) ---- */
 
 /* ---- Responsive ---- */
 
