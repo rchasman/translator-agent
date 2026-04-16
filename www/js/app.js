@@ -1,4 +1,5 @@
-// translator-agent marketing site — pretext line-by-line language reveal
+// translator-agent — DOM-fitted instant language morphing
+// Zero animation. Text morphs in place. Heights locked. Font-sizes adapt via DOM measurement.
 
 const RTL = new Set(['ar', 'he', 'fa', 'ur'])
 const PREFIX = 't-'
@@ -7,7 +8,7 @@ const CANDIDATES = [
   'th', 'vi', 'it', 'nl', 'tr', 'pl', 'sv', 'uk', 'el', 'cs',
 ]
 
-// Google Fonts to load per locale (only non-Latin scripts)
+// Google Fonts for non-Latin scripts (loaded at init for correct measurement)
 const GFONTS = {
   ja: 'Noto+Sans+JP:wght@400;700',
   ko: 'Noto+Sans+KR:wght@400;700',
@@ -16,17 +17,9 @@ const GFONTS = {
   hi: 'Noto+Sans+Devanagari:wght@400;700',
 }
 
-const state = {
-  locales: [],
-  index: 0,
-  texts: {},
-  busy: false,
-  pretext: null,
-}
+const state = { locales: [], index: 0, texts: {}, fits: {}, heights: {}, locked: false }
 
 // --- helpers ---
-
-const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 const translatableEls = (root = document) =>
   [...root.querySelectorAll('[id]')].filter(el => el.id.startsWith(PREFIX))
@@ -34,52 +27,33 @@ const translatableEls = (root = document) =>
 const extractTexts = doc =>
   translatableEls(doc).reduce((acc, el) => ({ ...acc, [el.id]: el.innerHTML }), {})
 
+const toPlain = html => {
+  const d = document.createElement('div')
+  d.innerHTML = html
+  return d.textContent || ''
+}
+
 const basePath = () =>
   (document.documentElement.lang || 'en') === 'en' ? '.' : '..'
 
 const localePath = locale =>
   locale === 'en' ? `${basePath()}/index.html` : `${basePath()}/${locale}/index.html`
 
-const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+// --- font loading ---
 
-// --- font + css loading ---
-
-const loaded = { fonts: new Set(), css: new Set() }
-
-const loadLocaleFont = async locale => {
+const loadFont = async locale => {
   const spec = GFONTS[locale]
-  if (!spec || loaded.fonts.has(locale)) return
+  if (!spec) return
   const link = document.createElement('link')
   link.rel = 'stylesheet'
   link.href = `https://fonts.googleapis.com/css2?family=${spec}&display=swap`
   document.head.appendChild(link)
-  try { await document.fonts.load(`16px "${spec.split(':')[0].replace(/\+/g, ' ')}"`) } catch {}
-  loaded.fonts.add(locale)
+  const name = spec.split(':')[0].replace(/\+/g, ' ')
+  try { await document.fonts.load(`400 16px "${name}"`) } catch {}
+  try { await document.fonts.load(`700 16px "${name}"`) } catch {}
 }
 
-const loadLocaleCSS = locale => {
-  if (locale === 'en' || loaded.css.has(locale)) return
-  const link = document.createElement('link')
-  link.rel = 'stylesheet'
-  link.href = `${basePath()}/${locale}/_locale.css`
-  document.head.appendChild(link)
-  loaded.css.add(locale)
-}
-
-// --- pretext ---
-
-const computeLines = (text, font, maxWidth, lineHeight) => {
-  if (!state.pretext || !text.trim() || maxWidth <= 0) return null
-  try {
-    const prepared = state.pretext.prepareWithSegments(text, font)
-    const { lines } = state.pretext.layoutWithLines(prepared, maxWidth, lineHeight)
-    return lines.map(l => l.text)
-  } catch {
-    return null
-  }
-}
-
-// --- locale discovery ---
+// --- discovery ---
 
 const fetchLocale = async locale => {
   try {
@@ -99,69 +73,90 @@ const discover = async () => {
   state.index = 0
 }
 
-// --- transition ---
+// --- DOM measurement: find font-size that fills target height ---
+// Uses a hidden probe element — same rendering engine as the real page = zero divergence.
 
-const transitionTo = async index => {
-  if (state.busy) return
+const precompute = () => {
+  const els = translatableEls()
+
+  // create offscreen probe
+  const probe = document.createElement('div')
+  probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:0;'
+  document.body.appendChild(probe)
+
+  // snapshot each element's geometry + styles
+  const info = els.map(el => {
+    const cs = getComputedStyle(el)
+    state.heights[el.id] = el.offsetHeight
+    return {
+      id: el.id,
+      height: el.offsetHeight,
+      width: el.clientWidth,
+      fontSize: parseFloat(cs.fontSize),
+      // copy all typographic styles to probe
+      css: `width:${el.clientWidth}px;font-family:${cs.fontFamily};font-weight:${cs.fontWeight};line-height:${cs.lineHeight};letter-spacing:${cs.letterSpacing};`,
+    }
+  })
+
+  // for every locale, binary search font-size via DOM measurement
+  state.locales.map(locale => {
+    const texts = state.texts[locale]
+    if (!texts) return
+    state.fits[locale] = {}
+
+    info.map(({ id, height, width, fontSize, css }) => {
+      if (!texts[id]) return
+
+      probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:0;${css}`
+      probe.innerHTML = texts[id]
+
+      // binary search: find largest font-size where text fits within target height
+      let lo = fontSize * 0.5, hi = fontSize * 1.5
+      for (let i = 0; i < 20; i++) {
+        const mid = (lo + hi) / 2
+        probe.style.fontSize = `${mid}px`
+        // 1px safety margin to prevent sub-pixel overflow clipping
+        if (probe.offsetHeight > height - 1) hi = mid
+        else lo = mid
+      }
+
+      state.fits[locale][id] = Math.round(lo * 100) / 100
+    })
+  })
+
+  document.body.removeChild(probe)
+}
+
+// --- transition: instant, synchronous, one paint frame ---
+
+const transitionTo = index => {
   const locale = state.locales[index]
   if (!locale || !state.texts[locale]) return
 
-  state.busy = true
   state.index = index
   const texts = state.texts[locale]
-  const els = translatableEls().filter(el => texts[el.id] != null)
+  const fits = state.fits[locale] || {}
+  const els = translatableEls()
 
-  // phase 1 — fade out
-  els.map(el => {
-    el.style.transition = 'opacity 0.28s ease'
-    el.style.opacity = '0'
-  })
-  await sleep(300)
+  // lock heights on first transition
+  if (!state.locked) {
+    els.map(el => {
+      el.style.height = `${state.heights[el.id]}px`
+      el.style.overflow = 'hidden'
+    })
+    state.locked = true
+  }
 
-  // phase 2 — apply locale styles and load fonts
+  // single synchronous batch — one browser paint, no font-family swap (avoids FOIT flash)
   document.documentElement.lang = locale
   document.documentElement.dir = RTL.has(locale) ? 'rtl' : 'ltr'
-  loadLocaleCSS(locale)
-  await loadLocaleFont(locale)
-  window.scrollTo({ top: 0, behavior: 'instant' })
 
-  // phase 3 — swap content, compute pretext lines, render staggered
-  let lineCount = 0
-
-  els.map(el => {
-    // set real content so computed styles resolve with locale CSS
+  els.filter(el => texts[el.id] != null).map(el => {
     el.innerHTML = texts[el.id]
-    el.style.transition = 'none'
-
-    // read the resolved font after locale CSS is active
-    const cs = getComputedStyle(el)
-    const font = cs.font
-    const maxW = el.clientWidth
-    const lh = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.7
-    const plain = el.textContent || ''
-
-    // pretext: compute exact line breaks
-    const lines = computeLines(plain, font, maxW, lh)
-
-    if (lines && lines.length > 0) {
-      el.innerHTML = lines
-        .map((line, i) =>
-          `<span class="t-line" style="animation-delay:${(lineCount + i) * 40}ms">${esc(line)}</span>`)
-        .join('')
-      lineCount += lines.length
-    }
-
-    // reveal — line spans handle their own opacity animation
-    el.style.opacity = '1'
+    el.style.fontSize = fits[el.id] ? `${fits[el.id]}px` : ''
   })
 
   updateBar()
-
-  // phase 4 — after cascade completes, restore clean HTML
-  await sleep(Math.max(lineCount * 40 + 500, 700))
-  els.map(el => { el.innerHTML = texts[el.id] })
-
-  state.busy = false
 }
 
 // --- ui ---
@@ -169,12 +164,9 @@ const transitionTo = async index => {
 const buildBar = () => {
   const bar = document.getElementById('locale-bar')
   if (!bar) return
-
   bar.innerHTML = state.locales
-    .map((l, i) =>
-      `<button class="lp${i === state.index ? ' active' : ''}" data-i="${i}">${l}</button>`)
+    .map((l, i) => `<button class="lp${i === state.index ? ' active' : ''}" data-i="${i}">${l}</button>`)
     .join('')
-
   bar.addEventListener('click', e => {
     const btn = e.target.closest('[data-i]')
     if (!btn) return
@@ -184,25 +176,16 @@ const buildBar = () => {
 }
 
 const updateBar = () =>
-  [...document.querySelectorAll('.lp')]
-    .map((p, i) => p.classList.toggle('active', i === state.index))
+  [...document.querySelectorAll('.lp')].map((p, i) => p.classList.toggle('active', i === state.index))
 
 // --- input ---
 
 const setupInput = () => {
-  const cycle = d => {
-    const next = (state.index + d + state.locales.length) % state.locales.length
-    transitionTo(next)
-  }
+  const cycle = d => transitionTo((state.index + d + state.locales.length) % state.locales.length)
 
   document.addEventListener('keydown', e => {
-    if (e.code === 'Space' || e.code === 'ArrowRight') {
-      e.preventDefault()
-      cycle(1)
-    } else if (e.code === 'ArrowLeft') {
-      e.preventDefault()
-      cycle(-1)
-    }
+    if (e.code === 'Space' || e.code === 'ArrowRight') { e.preventDefault(); cycle(1) }
+    else if (e.code === 'ArrowLeft') { e.preventDefault(); cycle(-1) }
   })
 
   document.querySelector('main')?.addEventListener('click', () => cycle(1))
@@ -211,15 +194,18 @@ const setupInput = () => {
 // --- init ---
 
 const init = async () => {
-  try { state.pretext = await import('@chenglou/pretext') } catch {}
-
   await discover()
 
-  if (state.locales.length > 1) {
-    buildBar()
-    setupInput()
-    document.getElementById('hint')?.classList.add('visible')
-  }
+  if (state.locales.length <= 1) return
+
+  // load ALL locale fonts before pre-computing
+  await Promise.all(state.locales.map(loadFont))
+  await document.fonts.ready
+
+  precompute()
+  buildBar()
+  setupInput()
+  document.getElementById('hint')?.classList.add('visible')
 }
 
 init()
