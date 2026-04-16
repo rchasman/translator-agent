@@ -1,5 +1,5 @@
-import { mkdir, copyFile } from "node:fs/promises";
-import { join, dirname } from "node:path";
+import { mkdir, symlink, copyFile } from "node:fs/promises";
+import { join, dirname, relative as toRelative } from "node:path";
 import type { TranslationResult } from "./translator.ts";
 import type { StaticFile } from "./scanner.ts";
 import { generateMiddleware } from "./middleware-gen.ts";
@@ -11,19 +11,20 @@ export type WriteStats = {
   middleware: boolean;
 };
 
-// Inject lang and dir attributes into <html> tags
 const injectHtmlAttrs = (html: string, locale: string): string => {
   const { dir } = getLocaleStyle(locale);
-  // Replace <html...> with lang and dir attrs
-  return html
-    .replace(/<html([^>]*)>/i, (match, attrs: string) => {
-      const cleaned = attrs
-        .replace(/\s*lang="[^"]*"/g, "")
-        .replace(/\s*dir="[^"]*"/g, "")
-        .trim();
-      const space = cleaned ? " " : "";
-      return `<html lang="${locale}" dir="${dir}"${space}${cleaned}>`;
-    });
+  const hasHtmlTag = /<html[\s>]/i.test(html);
+
+  if (!hasHtmlTag) return html;
+
+  return html.replace(/<html([^>]*)>/i, (_match, attrs: string) => {
+    const cleaned = attrs
+      .replace(/\s*lang="[^"]*"/g, "")
+      .replace(/\s*dir="[^"]*"/g, "")
+      .trim();
+    const space = cleaned ? " " : "";
+    return `<html lang="${locale}" dir="${dir}"${space}${cleaned}>`;
+  });
 };
 
 export const writeResults = async (
@@ -61,14 +62,24 @@ export const writeResults = async (
     generateLocaleStylesheet(locales)
   );
 
-  // Copy static files into each locale dir
+  // Symlink static files into each locale dir (avoids O(locales * files) disk copies)
   if (staticFiles.length > 0) {
     await Promise.all(
       locales.flatMap((locale) =>
         staticFiles.map(async (file) => {
           const outPath = join(outputDir, locale, file.relativePath);
           await mkdir(dirname(outPath), { recursive: true });
-          await copyFile(file.absolutePath, outPath);
+          const target = toRelative(dirname(outPath), file.absolutePath);
+          try {
+            await symlink(target, outPath);
+          } catch (err: unknown) {
+            const code = err instanceof Error && "code" in err ? (err as NodeJS.ErrnoException).code : null;
+            if (code === "EEXIST" || code === "EPERM") {
+              await copyFile(file.absolutePath, outPath);
+            } else {
+              throw err;
+            }
+          }
         })
       )
     );
