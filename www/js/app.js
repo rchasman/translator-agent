@@ -1,6 +1,6 @@
 // translator-agent — instant language morphing with pretext overflow fade
-// Text morphs in place. Heights locked. Font-sizes adapt via DOM measurement.
-// Overflow text fades via CSS mask, powered by pretext height analysis.
+// Text swaps instantly. Heights locked. Font-sizes fitted via DOM measurement.
+// Overflow fades via CSS mask powered by pretext.
 import { prepare, layout } from '@chenglou/pretext'
 
 const RTL = new Set(['ar', 'he', 'fa', 'ur'])
@@ -8,17 +8,32 @@ const PREFIX = 't-'
 const CANDIDATES = [
   'ja', 'ar', 'de', 'fr', 'ko', 'pt-BR', 'zh-CN', 'es', 'hi', 'ru',
   'th', 'vi', 'it', 'nl', 'tr', 'pl', 'sv', 'uk', 'el', 'cs',
+  'id', 'ms', 'fil', 'my', 'bn', 'ta', 'te', 'mr', 'gu', 'kn',
+  'ml', 'pa', 'ur', 'fa', 'he', 'kk', 'uz', 'pt', 'ca', 'gl',
+  'da', 'no', 'fi', 'is', 'sk', 'hu', 'ro', 'bg', 'hr', 'sr',
+  'sl', 'lt', 'lv', 'et', 'ga', 'sw', 'am', 'ha', 'yo', 'zu',
+  'af', 'km', 'lo', 'ne', 'si', 'ka', 'az', 'mn',
 ]
 
 const GFONTS = {
   ja: 'Noto+Sans+JP:wght@400;700',
   ko: 'Noto+Sans+KR:wght@400;700',
   ar: 'Noto+Naskh+Arabic:wght@400;700',
+  he: 'Noto+Sans+Hebrew:wght@400;700',
   'zh-CN': 'Noto+Sans+SC:wght@400;700',
+  'zh-TW': 'Noto+Sans+TC:wght@400;700',
   hi: 'Noto+Sans+Devanagari:wght@400;700',
+  bn: 'Noto+Sans+Bengali:wght@400;700',
+  ta: 'Noto+Sans+Tamil:wght@400;700',
+  th: 'Noto+Sans+Thai:wght@400;700',
+  am: 'Noto+Sans+Ethiopic:wght@400;700',
+  ka: 'Noto+Sans+Georgian:wght@400;700',
+  km: 'Noto+Sans+Khmer:wght@400;700',
+  my: 'Noto+Sans+Myanmar:wght@400;700',
+  si: 'Noto+Sans+Sinhala:wght@400;700',
 }
 
-const state = { locales: [], index: 0, texts: {}, fits: {}, heights: {}, locked: false }
+const state = { locales: [], index: 0, texts: {}, fits: {}, heights: {} }
 
 // --- helpers ---
 
@@ -27,12 +42,6 @@ const translatableEls = (root = document) =>
 
 const extractTexts = doc =>
   translatableEls(doc).reduce((acc, el) => ({ ...acc, [el.id]: el.innerHTML }), {})
-
-const toPlain = html => {
-  const d = document.createElement('div')
-  d.innerHTML = html
-  return d.textContent || ''
-}
 
 const basePath = () =>
   (document.documentElement.lang || 'en') === 'en' ? '.' : '..'
@@ -49,9 +58,6 @@ const loadFont = async locale => {
   link.rel = 'stylesheet'
   link.href = `https://fonts.googleapis.com/css2?family=${spec}&display=swap`
   document.head.appendChild(link)
-  const name = spec.split(':')[0].replace(/\+/g, ' ')
-  try { await document.fonts.load(`400 16px "${name}"`) } catch {}
-  try { await document.fonts.load(`700 16px "${name}"`) } catch {}
 }
 
 // --- discovery ---
@@ -74,11 +80,10 @@ const discover = async () => {
   state.index = 0
 }
 
-// --- precompute: DOM measurement for font-size fitting ---
+// --- precompute: DOM binary search for font-size ---
 
 const precompute = () => {
   const els = translatableEls()
-
   const probe = document.createElement('div')
   probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:0;'
   document.body.appendChild(probe)
@@ -89,7 +94,6 @@ const precompute = () => {
     return {
       id: el.id,
       height: el.offsetHeight,
-      width: el.clientWidth,
       fontSize: parseFloat(cs.fontSize),
       css: `width:${el.clientWidth}px;font-family:${cs.fontFamily};font-weight:${cs.fontWeight};line-height:${cs.lineHeight};letter-spacing:${cs.letterSpacing};`,
     }
@@ -100,13 +104,12 @@ const precompute = () => {
     if (!texts) return
     state.fits[locale] = {}
 
-    info.map(({ id, height, width, fontSize, css }) => {
+    info.map(({ id, height, fontSize, css }) => {
       if (!texts[id]) return
-
       probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:0;${css}`
       probe.innerHTML = texts[id]
 
-      // barely shrink — max 5%. Let pretext fade mask handle overflow gracefully
+      // max 5% shrink — pretext mask handles overflow beyond that
       let lo = fontSize * 0.95, hi = fontSize
       for (let i = 0; i < 20; i++) {
         const mid = (lo + hi) / 2
@@ -114,7 +117,6 @@ const precompute = () => {
         if (probe.offsetHeight > height - 1) hi = mid
         else lo = mid
       }
-
       state.fits[locale][id] = Math.round(lo * 100) / 100
     })
   })
@@ -122,9 +124,9 @@ const precompute = () => {
   document.body.removeChild(probe)
 }
 
-// --- pretext: detect overflow and apply fade mask ---
+// --- pretext: overflow fade mask ---
 
-const applyFadeMask = (el) => {
+const applyFadeMask = el => {
   const containerH = state.heights[el.id]
   if (!containerH) return
 
@@ -139,24 +141,21 @@ const applyFadeMask = (el) => {
     const { height: textH } = layout(p, maxW, lh)
 
     if (textH > containerH + 4) {
-      // overflow — apply gradient mask: fully visible up to fadeStart, then fade out
-      const fadeStart = Math.max(50, ((containerH - lh * 1.5) / containerH) * 100)
+      const fadeStart = Math.max(40, ((containerH - lh * 2) / containerH) * 100)
       const mask = `linear-gradient(to bottom, black 0%, black ${fadeStart}%, transparent 100%)`
       el.style.maskImage = mask
       el.style.webkitMaskImage = mask
     } else {
-      // fits — no mask needed
       el.style.maskImage = 'none'
       el.style.webkitMaskImage = 'none'
     }
   } catch {
-    // pretext failed — no mask
     el.style.maskImage = 'none'
     el.style.webkitMaskImage = 'none'
   }
 }
 
-// --- transition: instant swap + async fade mask ---
+// --- transition: instant swap + async pretext mask ---
 
 const transitionTo = index => {
   const locale = state.locales[index]
@@ -165,21 +164,20 @@ const transitionTo = index => {
   state.index = index
   const texts = state.texts[locale]
   const fits = state.fits[locale] || {}
+  const isRTL = RTL.has(locale)
   const els = translatableEls()
 
-  // lock heights on first transition
-  if (!state.locked) {
-    els.map(el => {
-      el.style.height = `${state.heights[el.id]}px`
-    })
-    state.locked = true
-  }
-
-  // instant swap — single synchronous batch
-  // set lang but keep page layout LTR always — RTL only on text elements (no layout jitter)
   document.documentElement.lang = locale
-  const isRTL = RTL.has(locale)
 
+  // lock heights on first transition
+  els.map(el => {
+    if (!el.style.height) {
+      el.style.height = `${state.heights[el.id]}px`
+      el.style.overflow = 'hidden'
+    }
+  })
+
+  // instant swap — one synchronous batch, one paint
   els.filter(el => texts[el.id] != null).map(el => {
     el.innerHTML = texts[el.id]
     el.style.fontSize = fits[el.id] ? `${fits[el.id]}px` : ''
@@ -189,7 +187,7 @@ const transitionTo = index => {
 
   updateBar()
 
-  // async: apply pretext fade masks (non-blocking, next frame)
+  // async: pretext fade masks for overflow (next frame, non-blocking)
   requestAnimationFrame(() => {
     els.filter(el => texts[el.id] != null).map(applyFadeMask)
   })
@@ -218,12 +216,10 @@ const updateBar = () =>
 
 const setupInput = () => {
   const cycle = d => transitionTo((state.index + d + state.locales.length) % state.locales.length)
-
   document.addEventListener('keydown', e => {
     if (e.code === 'Space' || e.code === 'ArrowRight') { e.preventDefault(); cycle(1) }
     else if (e.code === 'ArrowLeft') { e.preventDefault(); cycle(-1) }
   })
-
   document.querySelector('main')?.addEventListener('click', () => cycle(1))
 }
 
@@ -231,9 +227,9 @@ const setupInput = () => {
 
 const init = async () => {
   await discover()
-
   if (state.locales.length <= 1) return
 
+  // load fonts for discovered locales
   await Promise.all(state.locales.map(loadFont))
   await document.fonts.ready
 
