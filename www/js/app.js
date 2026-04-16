@@ -83,16 +83,19 @@ const precompute = () => {
 
   const info = els.map(el => {
     const cs = getComputedStyle(el)
+    const fontSize = parseFloat(cs.fontSize)
+    const lhRatio = parseFloat(cs.lineHeight) / fontSize
     return {
       id: el.id,
       enHeight: el.offsetHeight,
-      fontSize: parseFloat(cs.fontSize),
-      css: `width:${el.clientWidth}px;font-family:${cs.fontFamily};font-weight:${cs.fontWeight};font-size:${cs.fontSize};line-height:${cs.lineHeight};letter-spacing:${cs.letterSpacing};`,
+      fontSize,
+      // line-height as ratio so it scales with font-size changes during binary search
+      css: `width:${el.clientWidth}px;font-family:${cs.fontFamily};font-weight:${cs.fontWeight};font-size:${cs.fontSize};line-height:${lhRatio};letter-spacing:${cs.letterSpacing};`,
     }
   })
 
   info.map(({ id, enHeight, fontSize, css }) => {
-    // measure every locale at natural font-size
+    // measure every locale at natural font-size to find the cap
     const localeHeights = {}
     state.locales.map(locale => {
       const texts = state.texts[locale]
@@ -108,17 +111,21 @@ const precompute = () => {
     const containerH = Math.min(maxNatural, cap)
     state.heights[id] = containerH
 
-    // for locales that overflow the cap: shrink font-size to fit
+    // for EVERY locale: fit font-size so text fills the container exactly
+    // short text → grow font, long text → shrink font
     state.locales.map(locale => {
-      const h = localeHeights[locale]
-      if (!h || h <= containerH) return // fits naturally
+      const texts = state.texts[locale]
+      if (!texts?.[id]) return
 
-      // binary search: largest font-size where text fits
+      const naturalH = localeHeights[locale]
+      if (Math.abs(naturalH - containerH) < 3) return // already fits
+
       if (!state.fits[locale]) state.fits[locale] = {}
       probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:0;${css}`
-      probe.innerHTML = state.texts[locale][id]
+      probe.innerHTML = texts[id]
 
-      let lo = fontSize * 0.4, hi = fontSize
+      // binary search: largest font-size that fits within containerH
+      let lo = fontSize * 0.4, hi = fontSize * 2
       for (let i = 0; i < 20; i++) {
         const mid = (lo + hi) / 2
         probe.style.fontSize = `${mid}px`
