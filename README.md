@@ -10,6 +10,10 @@ bunx translator-agent -s ./dist -l all
 
 No i18n library. No translation service. No spreadsheets. No signup.
 
+> **You're reading the proof.** This README was translated into every language below by running `bunx translator-agent -s README.md -l all`. The Japanese version rewrote "No spreadsheets" as something funnier. The Arabic version is RTL. The German version is longer because German always is. Pick your language and see for yourself:
+>
+> [ja](./translations/ja/README.md) | [zh-CN](./translations/zh-CN/README.md) | [ko](./translations/ko/README.md) | [ar](./translations/ar/README.md) | [he](./translations/he/README.md) | [fr](./translations/fr/README.md) | [de](./translations/de/README.md) | [es](./translations/es/README.md) | [pt-BR](./translations/pt-BR/README.md) | [hi](./translations/hi/README.md) | [th](./translations/th/README.md) | [ru](./translations/ru/README.md) | [tr](./translations/tr/README.md) | [vi](./translations/vi/README.md) | [id](./translations/id/README.md) | [sv](./translations/sv/README.md) | [pl](./translations/pl/README.md) | [all 71 languages...](./translations/)
+
 ---
 
 ## What this does
@@ -222,18 +226,25 @@ Options:
 
 ## GitHub Action example
 
-This repo translates its own README. When `README.md` changes on main, a GitHub Action runs `bunx translator-agent` and commits the results to `translations/`. That's it — four steps, no dependencies beyond Bun:
+This repo translates its own README. Translations are cached — they only regenerate when the source changes:
 
 ```yaml
 - uses: actions/checkout@v4
 - uses: oven-sh/setup-bun@v2
-- run: bunx translator-agent -s . -l all -o ./translations
+
+- uses: actions/cache@v4
+  id: cache
+  with:
+    path: translations/
+    key: translations-${{ hashFiles('README.md') }}
+
+- if: steps.cache.outputs.cache-hit != 'true'
+  run: bunx translator-agent -s . -l all -o ./translations
   env:
     ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-- run: git add translations/ && git diff --staged --quiet || git commit -m "Translate" && git push
 ```
 
-See [`.github/workflows/translate-readme.yml`](.github/workflows/translate-readme.yml) for the full workflow. The `translations/` directory in this repo is the live output.
+Cache key is the hash of the source files. If `README.md` hasn't changed, the step is skipped entirely — zero LLM calls, zero cost. See [`.github/workflows/translate-readme.yml`](.github/workflows/translate-readme.yml).
 
 ---
 
