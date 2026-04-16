@@ -179,13 +179,7 @@ footer p { font-size: 0.8rem; }
   margin: 0 0.1rem;
 }
 
-/* ---- Locked text containers — overflow fades via mask ---- */
-
-[id^="t-"] {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 100%);
-  mask-image: linear-gradient(to bottom, black 0%, black 100%);
-}
+/* ---- Locked text containers ---- */
 
 /* ---- RTL text (per-element, page layout stays LTR) ---- */
 
