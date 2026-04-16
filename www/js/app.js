@@ -136,18 +136,20 @@ const precompute = () => {
 
       // proportional guess + correction — much faster than binary search
       let fs = fontSize * (containerH / naturalH)
-      let h = pretextMeasure(plain, fontWeight, fontFamily, fs, width, lhRatio)
 
-      // correct twice for sub-line-boundary accuracy
+      // clamp: don't let typography get absurd — max 1.3x grow, min 0.65x shrink
+      fs = Math.max(fontSize * 0.65, Math.min(fs, fontSize * 1.3))
+
+      let h = pretextMeasure(plain, fontWeight, fontFamily, fs, width, lhRatio)
       if (Math.abs(h - containerH) > 4) {
-        fs = fs * (containerH / h)
+        fs = Math.max(fontSize * 0.65, Math.min(fs * (containerH / h), fontSize * 1.3))
         h = pretextMeasure(plain, fontWeight, fontFamily, fs, width, lhRatio)
       }
       if (Math.abs(h - containerH) > 4) {
-        fs = fs * (containerH / h)
+        fs = Math.max(fontSize * 0.65, Math.min(fs * (containerH / h), fontSize * 1.3))
       }
 
-      // 8% safety margin — pretext canvas may differ slightly from CSS rendering
+      // 8% safety margin for canvas→CSS rendering divergence
       state.fits[locale][id] = Math.floor(fs * 0.92 * 10) / 10
     })
   })
