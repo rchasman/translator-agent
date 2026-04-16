@@ -70,14 +70,14 @@ const program = new Command()
     }
 
     console.log(`\nScanning ${sourceDir}...`);
-    const { mode, translatable, static: staticFiles } = await scan(sourceDir);
+    const { translatable, static: staticFiles } = await scan(sourceDir);
 
     if (translatable.length === 0) {
       console.log("No translatable files found.");
       process.exit(0);
     }
 
-    const modeLabel = mode === "single-file" ? "Single file" : "Full site";
+    const modeLabel = staticFiles.length > 0 ? "Full site" : "Single file";
     console.log(`${modeLabel} — ${translatable.length} translatable, ${staticFiles.length} static`);
     console.log(`Translating to ${locales.length} locale(s): ${locales.join(", ")}`);
 

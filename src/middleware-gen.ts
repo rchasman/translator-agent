@@ -72,5 +72,5 @@ export const config = {
 
 export const generateMiddleware = (locales: string[], defaultLocale?: string): string => {
   const rtlLocales = locales.filter(isRTL);
-  return template(locales, defaultLocale ?? locales[0]!, rtlLocales);
+  return template(locales, defaultLocale ?? "en", rtlLocales);
 };
