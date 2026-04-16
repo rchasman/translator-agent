@@ -9,12 +9,13 @@ import { resolveModel, type ProviderConfig } from "./provider.ts";
 import { resolveLocales, ALL_LOCALES } from "./locales.ts";
 
 const hasKeys = () =>
-  Boolean(process.env.ANTHROPIC_API_KEY || process.env.OPENAI_API_KEY);
+  Boolean(process.env.ANTHROPIC_API_KEY || process.env.OPENAI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY);
 
-const detectProvider = (): ProviderConfig["provider"] =>
-  process.env.OPENAI_API_KEY && !process.env.ANTHROPIC_API_KEY
-    ? "openai"
-    : "anthropic";
+const detectProvider = (): ProviderConfig["provider"] => {
+  if (process.env.GOOGLE_GENERATIVE_AI_API_KEY && !process.env.ANTHROPIC_API_KEY && !process.env.OPENAI_API_KEY) return "google";
+  if (process.env.OPENAI_API_KEY && !process.env.ANTHROPIC_API_KEY) return "openai";
+  return "anthropic";
+};
 
 const HELP_AFTER = `
 Examples:
@@ -35,8 +36,9 @@ How it works:
   translation with USDC via x402. No signup, no account.
 
 Environment:
-  ANTHROPIC_API_KEY    Use Anthropic models locally (default)
-  OPENAI_API_KEY       Use OpenAI models locally
+  ANTHROPIC_API_KEY              Anthropic (default)
+  OPENAI_API_KEY                 OpenAI
+  GOOGLE_GENERATIVE_AI_API_KEY   Google Gemini
 
 This is not translation — it's transcreation. Your jokes land in
 Japanese, your currency formats in euros, your tone adapts to each
