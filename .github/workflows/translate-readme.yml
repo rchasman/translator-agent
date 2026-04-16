@@ -1,0 +1,33 @@
+name: Translate README
+
+on:
+  push:
+    branches: [main]
+    paths: ['README.md']
+  workflow_dispatch:
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Cache translations
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: translations/
+          key: translations-${{ hashFiles('README.md') }}
+
+      - name: Translate README
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: bunx translator-agent -s . -l all -o ./translations
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Upload translations
+        uses: actions/upload-artifact@v4
+        with:
+          name: translations
+          path: translations/
