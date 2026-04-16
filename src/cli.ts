@@ -54,7 +54,7 @@ const program = new Command()
   .requiredOption("-l, --locales <locales>", 'target locales, comma-separated or "all" for 71 languages')
   .option("-o, --output <path>", "output directory", "./translations")
   .option("-p, --provider <name>", "anthropic | openai | google", "")
-  .option("-m, --model <id>", "model override (e.g. claude-sonnet-4-20250514, gpt-4.1-mini, gemini-2.5-flash)")
+  .option("-m, --model <id>", "model override (e.g. claude-sonnet-4-6-20250217, gpt-4.1-mini, gemini-3-flash)")
   .option("-c, --concurrency <n>", "max parallel LLM calls", (v) => parseInt(v, 10), 10)
   .option("--api-url <url>", "hosted service URL (auto-used when no API keys set)")
   .action(async (opts) => {

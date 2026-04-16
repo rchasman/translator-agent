@@ -32,7 +32,7 @@ export const RequestSchema = z.object({
 });
 
 export const translateContent = async (content: string, locale: string, type: string) => {
-  const model = anthropic(process.env.ANTHROPIC_MODEL ?? "claude-sonnet-4-20250514");
+  const model = anthropic(process.env.ANTHROPIC_MODEL ?? "claude-sonnet-4-6-20250217");
 
   const { object, usage } = await generateObject({
     model,

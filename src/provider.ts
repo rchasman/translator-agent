@@ -9,9 +9,9 @@ export type ProviderConfig = {
 };
 
 const defaults: Record<ProviderConfig["provider"], string> = {
-  anthropic: "claude-sonnet-4-20250514",
+  anthropic: "claude-sonnet-4-6-20250217",
   openai: "gpt-4.1-mini",
-  google: "gemini-2.5-flash",
+  google: "gemini-3-flash",
 };
 
 export const resolveModel = (config: ProviderConfig): LanguageModel => {

@@ -27,5 +27,5 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-  "exclude": ["api", "example", "translations", "www-out"]
+  "exclude": ["api", "example", "translations", "www-out", "www-test-out"]
 }
