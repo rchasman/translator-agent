@@ -1,7 +1,7 @@
 {
   "name": "translator-agent",
   "version": "0.1.0",
-  "description": "Point at your build, get parallel culture-aware translations into any locales you need.",
+  "description": "Point at your build, get parallel culture-aware translations into any locales you need. BYOK, runs local, culture-aware transcreation.",
   "module": "src/cli.ts",
   "type": "module",
   "bin": {
@@ -12,6 +12,22 @@
     "typecheck": "tsc --noEmit"
   },
   "license": "MIT",
+  "keywords": [
+    "i18n",
+    "translation",
+    "transcreation",
+    "localization",
+    "ai",
+    "cli",
+    "bun"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/roeychasman/translator-agent"
+  },
+  "files": [
+    "src/"
+  ],
   "devDependencies": {
     "@types/bun": "latest"
   },
