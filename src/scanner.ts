@@ -14,7 +14,6 @@ export type StaticFile = {
 };
 
 export type ScanResult = {
-  mode: "single-file" | "tree";
   translatable: ScannedFile[];
   static: StaticFile[];
 };
@@ -46,52 +45,33 @@ const walk = async (dir: string): Promise<string[]> => {
   return paths.flat();
 };
 
+const readTranslatable = async (absolutePath: string, relativePath: string): Promise<ScannedFile> => ({
+  relativePath,
+  absolutePath,
+  type: extToType(extname(absolutePath)),
+  content: await Bun.file(absolutePath).text(),
+});
+
 export const scan = async (sourceDir: string): Promise<ScanResult> => {
   const info = await stat(sourceDir);
 
-  // Single file — just translate it
   if (info.isFile()) {
     const ext = extname(sourceDir);
     if (!TRANSLATABLE_EXTENSIONS.has(ext)) {
-      return { mode: "single-file", translatable: [], static: [] };
+      return { translatable: [], static: [] };
     }
-    return {
-      mode: "single-file",
-      translatable: [
-        {
-          relativePath: sourceDir.split("/").pop()!,
-          absolutePath: sourceDir,
-          type: extToType(ext),
-          content: await Bun.file(sourceDir).text(),
-        },
-      ],
-      static: [],
-    };
+    const file = await readTranslatable(sourceDir, sourceDir.split("/").pop()!);
+    return { translatable: [file], static: [] };
   }
 
-  // Directory — walk everything, classify each file
   const allPaths = await walk(sourceDir);
+  const toEntry = (p: string) => ({ absolutePath: p, relativePath: relative(sourceDir, p) });
+  const isTranslatable = (p: string) => TRANSLATABLE_EXTENSIONS.has(extname(p));
 
-  const translatable: ScannedFile[] = [];
-  const staticFiles: StaticFile[] = [];
-
-  await Promise.all(
-    allPaths.map(async (absolutePath) => {
-      const relativePath = relative(sourceDir, absolutePath);
-      const ext = extname(absolutePath);
-
-      if (TRANSLATABLE_EXTENSIONS.has(ext)) {
-        translatable.push({
-          relativePath,
-          absolutePath,
-          type: extToType(ext),
-          content: await Bun.file(absolutePath).text(),
-        });
-      } else {
-        staticFiles.push({ relativePath, absolutePath });
-      }
-    })
+  const translatable = await Promise.all(
+    allPaths.filter(isTranslatable).map((p) => readTranslatable(p, relative(sourceDir, p)))
   );
+  const staticFiles = allPaths.filter((p) => !isTranslatable(p)).map(toEntry);
 
-  return { mode: "tree", translatable, static: staticFiles };
+  return { translatable, static: staticFiles };
 };
