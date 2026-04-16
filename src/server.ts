@@ -46,7 +46,7 @@ export type ServerOptions = {
   port?: number;
   facilitatorUrl?: string;
   maxPrice?: string;
-  network?: string;
+  network?: `${string}:${string}`;
 };
 
 export const startServer = (opts: ServerOptions) => {
@@ -55,7 +55,7 @@ export const startServer = (opts: ServerOptions) => {
     port = 4021,
     facilitatorUrl = "https://x402.org/facilitator",
     maxPrice = "$0.10",
-    network = "eip155:8453",
+    network = "eip155:8453" as const,
   } = opts;
 
   const app = express();
@@ -110,7 +110,7 @@ export const startServer = (opts: ServerOptions) => {
     const actualCost = Math.max(0.001, totalTokens * 0.000001);
     const costString = `$${actualCost.toFixed(6)}`;
 
-    setSettlementOverrides(res, { finalPrice: costString });
+    setSettlementOverrides(res, { amount: costString });
 
     res.json({
       translated: object.translated,
