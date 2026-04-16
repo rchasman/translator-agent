@@ -2,13 +2,20 @@ import { mkdir, copyFile } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import type { TranslationResult } from "./translator.ts";
 import type { StaticFile } from "./scanner.ts";
+import { generateMiddleware } from "./middleware-gen.ts";
+
+export type WriteStats = {
+  translated: number;
+  copied: number;
+  middleware: boolean;
+};
 
 export const writeResults = async (
   results: TranslationResult[],
   staticFiles: StaticFile[],
   outputDir: string,
   locales: string[]
-): Promise<{ translated: number; copied: number }> => {
+): Promise<WriteStats> => {
   // Write translated files
   await Promise.all(
     results.map(async (result) => {
@@ -18,7 +25,7 @@ export const writeResults = async (
     })
   );
 
-  // Copy static files (CSS, JS, images, etc.) into each locale dir
+  // Copy static files into each locale dir
   if (staticFiles.length > 0) {
     await Promise.all(
       locales.flatMap((locale) =>
@@ -31,8 +38,13 @@ export const writeResults = async (
     );
   }
 
+  // Generate Vercel middleware for locale detection + rewrite
+  const middlewarePath = join(outputDir, "middleware.ts");
+  await Bun.write(middlewarePath, generateMiddleware(locales));
+
   return {
     translated: results.length,
     copied: staticFiles.length * locales.length,
+    middleware: true,
   };
 };

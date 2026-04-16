@@ -114,13 +114,16 @@ const program = new Command()
           onProgress,
         });
 
-    const { translated, copied } = await writeResults(results, staticFiles, outputDir, locales);
+    const { translated, copied, middleware } = await writeResults(results, staticFiles, outputDir, locales);
     const elapsed = ((performance.now() - startTime) / 1000).toFixed(1);
 
     console.log(`\nDone in ${elapsed}s`);
     console.log(`  ${translated} files translated`);
     if (copied > 0) {
       console.log(`  ${copied} static files copied`);
+    }
+    if (middleware) {
+      console.log(`  Generated middleware.ts — deploy to Vercel for automatic locale detection`);
     }
     console.log(`  Output: ${outputDir}`);
   });
