@@ -10,7 +10,7 @@ export type TranslationResult = {
   translated: string;
 };
 
-const SYSTEM_PROMPT = `You are a transcreation specialist. You don't translate — you recreate.
+export const SYSTEM_PROMPT = `You are a transcreation specialist. You don't translate — you recreate.
 
 Your output must feel like it was originally written by a native speaker for a native audience.
 
@@ -23,7 +23,7 @@ Rules:
 - NEVER translate literally when meaning would be lost. Recreate the intent.
 - Preserve all structural markup (HTML tags, markdown syntax, JSON keys, template variables like {{name}} or {count}).`;
 
-const FORMAT_INSTRUCTIONS: Record<ScannedFile["type"], string> = {
+export const FORMAT_INSTRUCTIONS: Record<ScannedFile["type"], string> = {
   json: "This is a JSON i18n file. Translate all VALUES only — preserve keys exactly. Output valid JSON.",
   markdown: "This is a Markdown file. Preserve all markdown syntax. Translate the text content.",
   html: "This is an HTML file. Preserve all HTML tags and attributes. Translate text content only.",
@@ -39,7 +39,7 @@ Source content:
 ${file.content}
 \`\`\``;
 
-const TranslationSchema = z.object({
+export const TranslationSchema = z.object({
   translated: z.string().describe("The fully transcreated content in the target locale"),
   notes: z
     .array(z.string())
