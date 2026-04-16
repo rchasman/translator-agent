@@ -129,10 +129,11 @@ const precompute = () => {
       for (let i = 0; i < 20; i++) {
         const mid = (lo + hi) / 2
         probe.style.fontSize = `${mid}px`
-        if (probe.offsetHeight > containerH - 1) hi = mid
+        if (probe.offsetHeight > containerH - 4) hi = mid
         else lo = mid
       }
-      state.fits[locale][id] = Math.round(lo * 100) / 100
+      // knock off 5% to guarantee no clipping
+      state.fits[locale][id] = Math.floor(lo * 0.95 * 10) / 10
     })
   })
 
@@ -226,6 +227,9 @@ const init = async () => {
     const idx = state.locales.indexOf(urlLocale)
     if (idx >= 0) transitionTo(idx)
   }
+
+  // reveal — everything is measured and locked
+  document.body.classList.add('ready')
 }
 
 init()
