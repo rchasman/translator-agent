@@ -250,10 +250,10 @@ const updateBar = () =>
 const setupInput = () => {
   const cycle = d => transitionTo((state.index + d + state.locales.length) % state.locales.length)
   document.addEventListener('keydown', e => {
-    if (e.code === 'Space' || e.code === 'ArrowRight') { e.preventDefault(); cycle(1) }
-    else if (e.code === 'ArrowLeft') { e.preventDefault(); cycle(-1) }
+    if (e.code === 'Space' || e.code === 'ArrowRight' || e.key === 'l' || e.key === 'j') { e.preventDefault(); cycle(1) }
+    else if (e.code === 'ArrowLeft' || e.key === 'h' || e.key === 'k') { e.preventDefault(); cycle(-1) }
+    else if (e.code === 'Escape' || e.key === 'q') { e.preventDefault(); transitionTo(0) }
   })
-  document.querySelector('main')?.addEventListener('click', () => cycle(1))
 }
 
 // --- init ---
